@@ -24,6 +24,7 @@ header{
     position: sticky;
 }
 .header-logo{
+    height: 100%;
     max-width: 25%;
     max-height: 100%;
 }

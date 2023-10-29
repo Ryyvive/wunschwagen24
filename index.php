@@ -1,8 +1,7 @@
-
 <?php
 session_start();
 ?>
-<html>
+<html lang="DE">
 <head>
     <title>Wunschwagen 24 - Dein Gebrauchtwagen</title>
     <link rel="stylesheet" href="./styles.css">
