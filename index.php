@@ -9,7 +9,9 @@ session_start();
 </head>
 <body>
 <header>
-    <img src = "branding/logo_large.png">
+    <div class = "header-logo">
+        <img src = "branding/logo_large.png" alt="">
+    </div>
 </header>
     <h1>
         Testside
