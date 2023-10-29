@@ -5,7 +5,7 @@ session_start();
 <html>
 <head>
     <title>Wunschwagen 24 - Dein Gebrauchtwagen</title>
-    <link rel="stylessheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 <header>
