@@ -1,0 +1,5 @@
+Hauptfarbe: #0079FF (ein tiefes Blau, das Vertrauen und Zuverlässigkeit vermittelt)
+Sekundärfarbe: #FFA500 (ein auffälliges Orange, um Aufmerksamkeit zu erregen und Aktivität darzustellen)
+Akzentfarbe: #66CC33 (ein frisches Grün, das Nachhaltigkeit und Zuverlässigkeit symbolisiert)
+Hintergrundfarbe: #F5F5F5 (ein helles Grau, um eine saubere und moderne Ästhetik zu fördern)
+Textfarbe: #333333 (dunkles Grau, das für gute Lesbarkeit sorgt)
