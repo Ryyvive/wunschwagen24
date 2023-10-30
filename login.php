@@ -6,6 +6,7 @@ session_start();
     <head>
         <title>Anmeldung</title>
         <link rel="stylesheet" href="./styles.css">
+        <link rel="icon" href="branding/logo_small_icon_only.png">
     </head>
     <body>
         <div class = main-content style="background: transparent">
