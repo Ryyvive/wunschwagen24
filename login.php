@@ -9,8 +9,9 @@ session_start();
     </head>
     <body>
         <div class = main-content style="background: transparent">
-            <a href="index.php">&lt&ltZurück zur Startseite</a>
+            <a href="index.php">
             <img src="branding/logo_small_icon_only_inverted.png">
+            </a>
             <div class="breaker"></div>
         <div class="form-container">
               <form class="login-form">
