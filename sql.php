@@ -8,7 +8,7 @@ $database ="phpprojekt";
 
 $con = mysqli_init();
 #mysqli_ssl_set($con,NULL,NULL, NULL, NULL, NULL);
-mysqli_real_connect($con, $hostname,$username,$password,$database,"3306");
+mysqli_real_connect($con, $hostname,$username,$password,$database,"1433");
 
 $drop_ma = "DELETE FROM MA";
 $drop_ku = "DELETE FROM KU";
