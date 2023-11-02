@@ -17,7 +17,7 @@ session_start();
                     <img src="branding/logo_large.png" alt="">
                 </th>
                 <th>
-                    <a href="">Suchen</a>
+                    <a href="search.php">Suchen</a>
                     <a href>Verkaufen</a>
                     <a href>Beratung</a>
                 </th>
