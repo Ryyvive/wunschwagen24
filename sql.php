@@ -1,9 +1,8 @@
 <?php
 $hostname="wunschwagen24-dbserver-dev.database.windows.net";
-$username="PHPADMIN";
-$password="340\$Uuxwp7Mcxo7Khy";
-$sslmode="require";
-$database ="phpprojekt";
+$username="CloudSA1cb8415e";
+$password="340Uuxwp7Mcxo7Khy";
+$database ="wunschwagen-db-dev";
 
 
 $con = mysqli_init();
