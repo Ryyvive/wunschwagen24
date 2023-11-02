@@ -1,7 +1,7 @@
 <?php
 $hostname="wunschwagen24-dbserver-dev.database.windows.net";
 $username="PHPADMIN";
-$password="340$Uuxwp7Mcxo7Khy";
+$password="340\$Uuxwp7Mcxo7Khy";
 $sslmode="require";
 $database ="phpprojekt";
 
