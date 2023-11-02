@@ -1,5 +1,14 @@
 <?php
 session_start();
+$hostname="wunschwagen24-dbserver-dev.database.windows.net";
+$username="PHPADMIN";
+$password="340\$Uuxwp7Mcxo7Khy";
+$sslmode="require";
+$database ="phpprojekt";
+
+$con = mysqli_init();
+mysqli_real_connect($con, $hostname,$username,$password,$database,"1433");
+
 ?>
 <html lang="DE">
 <head>
