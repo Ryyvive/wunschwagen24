@@ -1,17 +1,5 @@
 <?php
 session_start();
-$serverName = "wunschwagen24-dbserver-dev.database.windows.net"; // update me
-$connectionOptions = array(
-    "Database" => "wunschwagen-db-dev", // update me
-    "Uid" => "CloudSA1cb8415e", // update me
-    "PWD" => "340Uuxwp7Mcxo7Khy" // update me
-);
-
-// Create connection
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-echo (sqlsrv_errors());
-// Check connection
-echo "Connected successfully";
 ?>
 <html lang="DE">
 <head>
