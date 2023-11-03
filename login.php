@@ -17,7 +17,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
     $conn = sqlsrv_connect($serverName, $connectionOptions);
     $res = sqlsrv_query($conn, $sql_check_mail);
     $row_count = sqlsrv_num_rows( $res );
-    echo $row_count;
+    print_r($res);
     if($row_count && $row_count == 1){
         $_SESSION["vorname"]=sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)[0][1];
         $valid = true;
