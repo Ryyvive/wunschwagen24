@@ -2,9 +2,9 @@
 session_start();
 $valid = true;
 $login = false;
-if (isset($_POST["email"]) && isset($_POST["password"])){
-    $email = htmlspecialchars($_POST["email"]);
-    $password_user = htmlspecialchars($_POST["password"]);
+if (isset($_GET["email"]) && isset($_GET["password"])){
+    $email = htmlspecialchars($_GET["email"]);
+    $password_user = htmlspecialchars($_GET["password"]);
 
     $sql_check_mail = "SELECT vorname FROM Customer WHERE email = '".$email. "' and WHERE password = ".$password_user;
     $serverName = "wunschwagen24-dbserver-dev.database.windows.net";
@@ -40,7 +40,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
             </a>
             <div class="breaker"></div>
         <div class="form-container">
-              <form class="login-form" method="POST" action="login.php">
+              <form class="login-form" method="GET" action="login.php">
                   <span style="margin: auto"><h1>WunschWagen24 Login</h1></span>
                   <?PHP if(!$valid){
                   echo '<span style="margin: auto color :red">Email oder Passwort sind incorrect</span>';
