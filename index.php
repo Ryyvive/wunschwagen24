@@ -1,5 +1,6 @@
 <?php
 session_start();
+echo "<h1>Willkommen ".$_SESSION["vorname"]."</h1>";
 ?>
 <html lang="DE">
 <head>
