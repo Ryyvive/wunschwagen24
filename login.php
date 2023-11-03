@@ -16,7 +16,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
 // Create connection
     $conn = sqlsrv_connect($serverName, $connectionOptions);
     $res = sqlsrv_query($conn, $sql_check_mail);
-    if($res->num_rows == 1){
+    if(sqlsrv_num_rows($res) == 1){
         $valid = true;
         $login = true;
         header("Location: index.php");
