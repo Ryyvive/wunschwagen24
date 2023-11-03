@@ -5,7 +5,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
     $email = htmlspecialchars($_POST["email"]);
     $password_user = htmlspecialchars($_POST["password"]);
 
-    $sql_check_mail = "SELECT vorname FROM Customer WHERE email = '".$email. "' and WHERE password = ''".$password_user."''";
+    $sql_check_mail = "SELECT vorname FROM Customer WHERE email = '".$email. "' and WHERE password = '".$password_user."'";
     $serverName = "wunschwagen24-dbserver-dev.database.windows.net";
     $connectionOptions = array(
         "Database" => "wunschwagen-db-dev",
