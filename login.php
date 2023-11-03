@@ -18,6 +18,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
     $res = sqlsrv_query($conn, $sql_check_mail);
     if(sqlsrv_has_rows($res)){
         $_SESSION["vorname"]=sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)["vorname"];
+        $_SESSION["email"] = $email;
         $valid = true;
         $login = true;
         header("Location: index.php");
