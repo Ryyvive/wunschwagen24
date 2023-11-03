@@ -44,7 +44,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
                   <?PHP if(!$valid){
                   echo '<span style="margin: auto color :red">Email oder Passwort sind incorrect</span>';
                   } ?>
-                <input required id="email" name="email" type="email" class="input" placeholder=<?php if(isset($email)){echo $email;}else{echo "Email";}?>>
+                <input required id="email" name="email" type="email" class="input" placeholder="Email" value = <?php if(isset($email)){echo $email;}?>>
                 <input required id="password" name="password" type="password" class="input" placeholder="Password">
                 <p class="page-link">
                     <span class="page-link-label">Passwort vergessen?</span>
