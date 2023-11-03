@@ -36,7 +36,7 @@ echo "Connected successfully";
                 <th>
                     <?php
                     if(isset($_SESSION["username"])){
-                        echo "<h1>Willkommen ".$_SESSION["username"]."</h1>";
+                        echo "<h1>Willkommen ".$_SESSION["vorname"]."</h1>";
                     }else{
                         ?>
                         <button onclick="window.location.href='login.php'">Anmelden</button>
