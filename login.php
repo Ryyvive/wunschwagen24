@@ -5,15 +5,15 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
     $email = htmlspecialchars($_POST["email"]);
     $password_user = htmlspecialchars($_POST["password"]);
 
-    #$sql_check_mail = "SELECT vorname FROM Customer WHERE email = '".$email. "' and WHERE password = ''".$password_user."''";
-    #$serverName = "wunschwagen24-dbserver-dev.database.windows.net";
-    #$connectionOptions = array(
-    #    "Database" => "wunschwagen-db-dev",
-    #    "Uid" => "CloudSA1cb8415e",
-    #    "PWD" => "340Uuxwp7Mcxo7Khy"
-    #);
+    $sql_check_mail = "SELECT vorname FROM Customer WHERE email = '".$email. "' and WHERE password = ''".$password_user."''";
+    $serverName = "wunschwagen24-dbserver-dev.database.windows.net";
+    $connectionOptions = array(
+        "Database" => "wunschwagen-db-dev",
+        "Uid" => "CloudSA1cb8415e",
+        "PWD" => "340Uuxwp7Mcxo7Khy"
+    );
 
-    #$conn = sqlsrv_connect($serverName, $connectionOptions);
+    $conn = sqlsrv_connect($serverName, $connectionOptions);
     #$res = sqlsrv_query($conn, $sql_check_mail);
     #if(sqlsrv_num_rows($res) == 1){
     #    $valid = true;
