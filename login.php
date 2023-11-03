@@ -1,4 +1,5 @@
 <?php
+session_start();
 $valid = true;
 $login = false;
 if (isset($_POST["email"]) && isset($_POST["password"])){
@@ -15,14 +16,14 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
 
     $conn = sqlsrv_connect($serverName, $connectionOptions);
     $res = sqlsrv_query($conn, $sql_check_mail);
-    echo sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC);
-    #if(sqlsrv_num_rows($res) == 1){
-    #    $valid = true;
-    #    $login = true;
-    #    header("Location: index.php");
-    #}else{
-    #    $valid = false;
-    #}
+    if($res){
+        $_SESSION["vorname"]=sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)[0][1];
+        $valid = true;
+        $login = true;
+        header("Location: index.php");
+    }else{
+        $valid = false;
+    }
 
 }
 ?>
