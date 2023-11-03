@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo "<h1>Willkommen ".$_SESSION["vorname"]."</h1>";
 ?>
 <html lang="DE">
 <head>
@@ -25,7 +24,7 @@ echo "<h1>Willkommen ".$_SESSION["vorname"]."</h1>";
                 <th>
                     <?php
                     if(isset($_SESSION["vorname"])){
-                        echo "<h1>Willkommen ".$_SESSION["vorname"]."</h1>";
+                        echo "<a>Willkommen ".$_SESSION["vorname"]."</a>";
                     }else{
                         ?>
                         <button onclick="window.location.href='login.php'">Anmelden</button>
@@ -41,7 +40,7 @@ echo "<h1>Willkommen ".$_SESSION["vorname"]."</h1>";
 <div class="breaker"></div>
 <div class="main-content">
     <h1>
-        Willkommen bei WunschWagen24 - Ihre Traumfahrzeuge, nach Ihren Wünschen.
+        Willkommen bei WunschWagen24 - Mit KI zu ihrem Traumwagen.
     </h1>
     <p>
         Bei WunschWagen24 dreht sich alles um Sie und Ihr Fahrerlebnis.</br>

@@ -43,7 +43,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
               <form class="login-form" action="login.php" method="POST" >
                   <span style="margin: auto"><h1>WunschWagen24 Login</h1></span>
                   <?PHP if(!$valid){
-                  echo '<span style="margin: auto color :red">Email oder Passwort sind incorrect</span>';
+                  echo '<span style="margin: auto; color :red">Email oder Passwort sind incorrect</span>';
                   } ?>
                 <input required id="email" name="email" type="email" class="input" placeholder="Email" value = <?php if(isset($email)){echo $email;}?>>
                 <input required id="password" name="password" type="password" class="input" placeholder="Password">
