@@ -15,7 +15,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
 
     $conn = sqlsrv_connect($serverName, $connectionOptions);
     $res = sqlsrv_query($conn, $sql_check_mail);
-    echo sqlsrv_num_rows($res);
+    echo $res;
     #if(sqlsrv_num_rows($res) == 1){
     #    $valid = true;
     #    $login = true;
