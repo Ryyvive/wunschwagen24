@@ -51,7 +51,7 @@ if (isset($_POST["email"]) && isset($_POST["vorname"]) && isset($_POST["nachname
             <p class="page-link">
                 <span class="page-link-label">Passwort vergessen?</span>
             </p>
-            <button class="form-btn" formaction="submit">Sign Up</button>
+            <input type="submit" class="form-btn">Sign Up</input>
         </form>
     </div>
 </div>
