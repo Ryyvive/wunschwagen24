@@ -3,7 +3,6 @@ session_start();
 $valid = true;
 $login = false;
 if (isset($_POST["email"]) && isset($_POST["password"])){
-    echo "drin";
     $email = htmlspecialchars($_POST["email"]);
     $password_user = htmlspecialchars($_POST["password"]);
 
@@ -46,8 +45,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
                   <?PHP if(!$valid){
                   echo '<span style="margin: auto color :red">Email oder Passwort sind incorrect</span>';
                   } ?>
-                <input type="email" class="input" placeholder=<?php if(isset($email)){echo $email;}else{echo "Email";}?>>
-                <input type="password" class="input" placeholder="Password">
+                <input required id="email" name="email" type="email" class="input" placeholder=<?php if(isset($email)){echo $email;}else{echo "Email";}?>>
+                <input required id="password" name="password" type="password" class="input" placeholder="Password">
                 <p class="page-link">
                     <span class="page-link-label">Passwort vergessen?</span>
                 </p>
