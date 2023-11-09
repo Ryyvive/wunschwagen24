@@ -7,9 +7,15 @@ $connectionOptions = array(
     "Uid" => "CloudSA1cb8415e",
     "PWD" => "340Uuxwp7Mcxo7Khy"
 );
-$conn = sqlsrv_connect($serverName, $connectionOptions)
+$conn = sqlsrv_connect($serverName, $connectionOptions);
 
-#$res = sqlsrv_query($conn, <statenment>);
+function search_AI(){
+    $input_variable = array(
+            "brand" => $_POST["brand"],
+            "modell" => $_POST["modell"]
+
+    );
+}
 ?>
 
 <html lang="DE">
@@ -23,32 +29,43 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
     <div class="breaker"></div>
     <div class="main-content">
         <label for="brand">Marke</label>
-        <select id="brand" name="brand">
-            <option selected value="*"></option>
-            <?php
-            $sqlstatement = "SELECT DISTINCT brand from cars";
-            $res = sqlsrv_query($conn, $sqlstatement);
-            while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
-                echo "<option value =".$row["brand"].">".$row["brand"]."</option>";
-            }
-            ?>
-        </select>
+
         <form class = "search" method = "POST" action="search.php">
+            <select id="brand" name="brand">
+                <option selected value="*"></option>
+                <?php
+                $sqlstatement = "SELECT DISTINCT brand from cars";
+                $res = sqlsrv_query($conn, $sqlstatement);
+                while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
+                    echo "<option value =".$row["brand"].">".$row["brand"]."</option>";
+                }
+                ?>
+            </select>
 
-
-            <label for="">Modell</label>
+            <label for="modell">Modell</label>
             <select id="modell" name="modell">
                 <option selected value="*"></option>
                 <?php
-                $sqlstatement = "SELECT DISTINCT modell from cars where brand = document.querySelector('#brand').value";
-                echo $sqlstatement;
+                $sqlstatement = "SELECT DISTINCT modell from cars";
                 $res = sqlsrv_query($conn, $sqlstatement);
                 while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
                     echo "<option value =".$row["modell"].">".$row["modell"]."</option>";
                 }
                 ?>
             </select>
-            <?php echo $sqlstatement; ?>
+
+            <label for="price">Preis</label>
+            <?php
+            $minstatement = "Select MIN(Preis) as Preis FROM CARS";
+            $maxstatement = "Select MAX(Preis) as Preis FROM Cars";
+            $minres = sqlsrv_query($conn, $minstatement);
+            $maxres = sqlsrv_query($conn, $maxstatement);
+            $min = sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["Preis"];
+            $max = sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["Preis"];
+            ?>
+            <input type="range" id="price" name="price" min="<?php  echo $min; ?>" max = "<?php  echo $min; ?>">
+
+
 
 
 
