@@ -22,18 +22,19 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
     <header></header>
     <div class="breaker"></div>
     <div class="main-content">
+        <label for="brand">Marke</label>
+        <select id="brand" name="brand">
+            <option selected value="*"></option>
+            <?php
+            $sqlstatement = "SELECT DISTINCT brand from cars";
+            $res = sqlsrv_query($conn, $sqlstatement);
+            while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
+                echo "<option value =".$row["brand"].">".$row["brand"]."</option>";
+            }
+            ?>
+        </select>
         <form class = "search" method = "POST" action="search.php">
-            <label for="brand">Marke</label>
-            <select id="brand" name="brand">
-                <option selected value="*"></option>
-                <?php
-                    $sqlstatement = "SELECT DISTINCT brand from cars";
-                    $res = sqlsrv_query($conn, $sqlstatement);
-                    while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
-                        echo "<option value =".$row["brand"].">".$row["brand"]."</option>";
-                    }
-                ?>
-            </select>
+
 
             <label for="">Modell</label>
             <select id="modell" name="modell">
