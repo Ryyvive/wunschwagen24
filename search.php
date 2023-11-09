@@ -25,7 +25,7 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
         <form class = "search" method = "POST" action="search.php">
             <select id="brand" name="brand">
                 <?php
-                    $sqlstatement = "SELECT DISTICT brand from cars";
+                    $sqlstatement = "SELECT DISTINCT brand from cars";
                     $res = sqlsrv_query($conn, $sqlstatement);
                     while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
                         echo "<option value =".$row["brand"].">".$row["brand"]."</option>";
