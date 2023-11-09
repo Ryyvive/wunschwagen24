@@ -43,7 +43,7 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
                 echo $sqlstatement;
                 $res = sqlsrv_query($conn, $sqlstatement);
                 while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
-                    echo "<option value =".$row["brand"].">".$row["brand"]."</option>";
+                    echo "<option value =".$row["modell"].">".$row["modell"]."</option>";
                 }
                 ?>
             </select>
