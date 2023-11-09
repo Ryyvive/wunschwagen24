@@ -24,7 +24,7 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
     <div class="main-content">
         <form class = "search" method = "POST" action="search.php">
             <label for="brand">Marke</label>
-            <select id="brand" name="brand" onchange="location.reload()">
+            <select id="brand" name="brand">
                 <option selected value="*">""</option>
                 <?php
                     $sqlstatement = "SELECT DISTINCT brand from cars";
