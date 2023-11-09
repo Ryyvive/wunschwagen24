@@ -25,7 +25,7 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
         <form class = "search" method = "POST" action="search.php">
             <label for="brand">Marke</label>
             <select id="brand" name="brand">
-                <option selected value="*">""</option>
+                <option selected value="*"></option>
                 <?php
                     $sqlstatement = "SELECT DISTINCT brand from cars";
                     $res = sqlsrv_query($conn, $sqlstatement);
@@ -37,9 +37,9 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
 
             <label for="">Modell</label>
             <select id="modell" name="modell">
-                <option selected value="*">""</option>
+                <option selected value="*"></option>
                 <?php
-                $sqlstatement = "SELECT DISTINCT modell from cars where brand = document.getElementById('brand').value";
+                $sqlstatement = "SELECT DISTINCT modell from cars where brand = document.querySelector('#brand').value";
                 echo $sqlstatement;
                 $res = sqlsrv_query($conn, $sqlstatement);
                 while( $row = sqlsrv_fetch_array( $res, SQLSRV_FETCH_ASSOC) ) {
