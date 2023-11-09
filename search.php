@@ -48,6 +48,7 @@ $conn = sqlsrv_connect($serverName, $connectionOptions)
                 }
                 ?>
             </select>
+            <?php echo $sqlstatement; ?>
 
 
 
