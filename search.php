@@ -28,9 +28,10 @@ function search_AI(){
     <header></header>
     <div class="breaker"></div>
     <div class="main-content">
-        <label for="brand">Marke</label>
+
 
         <form class = "search" method = "POST" action="search.php">
+            <label for="brand">Marke</label>
             <select id="brand" name="brand">
                 <option selected value="*"></option>
                 <?php
@@ -64,7 +65,7 @@ function search_AI(){
             $max = sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["Preis"];
             ?>
             <input type="range" id="price" name="price" min="<?php  echo $min; ?>" max = "<?php  echo $min; ?>">
-
+            <?php  echo $min; ?>
 
 
 
