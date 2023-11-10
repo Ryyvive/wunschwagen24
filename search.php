@@ -64,8 +64,7 @@ function search_AI(){
             $min = sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["Preis"];
             $max = sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["Preis"];
             ?>
-            <input type="range" id="price" name="price" min="<?php  echo $min; ?>" max = "<?php  echo $min; ?>">
-            <?php  echo $min; ?>
+            <input type="range" id="price" name="price" min="<?php  echo $min; ?>" max = "<?php  echo $max; ?>">
 
 
 
