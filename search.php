@@ -126,10 +126,10 @@ function search_AI(){
                 </select>
                 <h2>Wieviele Personen sollten mindestens in das Auto passen?</h2>
                 <label for="personen"></label>
-                <input type="number" min="1" max="9" name="personen" id="personen">
+                <input type="number" min="1" max="9" name="personen" id="personen" value="1">
                 <h2>Wieviel wollen Sie maximal für den Wagen ausgeben?</h2>
                 <label for="budget"></label>
-                <input type="number" min="1000"  name="budget" id="budget">
+                <input type="number" min="1000"  name="budget" id="budget" value="1000">
                 <h2>Welche Getriebeart bevorzugen Sie?</h2>
                 <input type="radio" name="getriebe" id="auto" value="auto" checked /><label for="auto">Automatik</label>
                 <input type="radio" name="getriebe" id="manuel" value="manuel" /><label for="manuel">Schaltgetriebe</label>
