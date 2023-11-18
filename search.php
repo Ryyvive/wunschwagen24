@@ -131,8 +131,8 @@ function search_AI(){
                 <label for="budget"></label>
                 <input type="number" min="1000"  name="budget" id="budget">
                 <h2>Welche Getriebeart bevorzugen Sie?</h2>
-                <input type="radio" name="getriebe" id="getriebe" value="auto" checked /><label for="getriebe">Automatik</label>
-                <input type="radio" name="getriebe" id="getriebe" value="manuel" /><label for="getriebe">Schaltgetriebe</label>
+                <input type="radio" name="getriebe" id="auto" value="auto" checked /><label for="auto">Automatik</label>
+                <input type="radio" name="getriebe" id="manuel" value="manuel" /><label for="manuel">Schaltgetriebe</label>
             </form>
         <?php
         }
