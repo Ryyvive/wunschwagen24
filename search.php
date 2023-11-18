@@ -15,6 +15,12 @@ function search_AI(){
             "modell" => $_POST["modell"]
 
     );
+
+    ## auf Suche Exact zutreffen
+    #TODO: Komplexe SQL Abfrage zum Suchen von genau passenden Angeboten
+
+    ## AI zum Heraussuchen des am besten passenden Wagens
+    #TODO: Bewertungsalgorithmus zum Bewerten (Scoring) welcher Wagen am besten geeignet ist
 }
 ?>
 
@@ -29,7 +35,24 @@ function search_AI(){
     <div class="breaker"></div>
     <div class="main-content">
 
+        <?php
+        if (!isset($_GET["suchtyp"])){
+            ?>
+            <form name="suchtyp-einstellung" method="get">
+                <h1>Wie hätten Sie es gerne?</h1>
+                <p>Unsere Entwickler sind auf dem neusten Stand der Technik und bieten ihnen mit KI die Möglichkeit über ein paar Fragen das perfekte Auto zur Verfügung zu stellen.</p>
+                <h2>Sie wissen schon, was Sie suchen?</h2>
+                <p>Auch das ist kein Problem. Mit einfachen Filtern ermöglichen wir Ihnen Zugriff auf Deutschlands größte Gebrauchtwagendatenbank.</p>
+                <label for="KI">Ich möchte mich beraten lassen</label><input type="radio" name="suchtyp" id="KI" value="KI" checked />
+                <label for="ML">Ich weiß wonach ich Suche</label><input type="radio" name="suchtyp" id="ML" value="ML" checked />
+                <input type="submit" value="Auf geht's">
+            </form>
 
+        <?php
+        }else if($_GET["suchtyp"]=="ML"){
+        ?>
+        <!--TODO: Hier Einfügen Text nach dem Motto: Ich weiß wonach ich suche (für Kategoriefelder Brand, Model, etx.)-->
+        <!--TODO: Dialog mit Fragen: Wie nutzen sie das Auto-->
         <form class = "search" method = "POST" action="search.php">
             <label for="brand">Marke</label>
             <select id="brand" name="brand">
@@ -56,15 +79,20 @@ function search_AI(){
             </select>
 
             <label for="price">Maximaler Preis</label>
-            <?php
-            $minstatement = "Select MIN(Preis) as Preis FROM CARS";
-            $maxstatement = "Select MAX(Preis) as Preis FROM Cars";
-            $minres = sqlsrv_query($conn, $minstatement);
-            $maxres = sqlsrv_query($conn, $maxstatement);
-            $min = sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["Preis"];
-            $max = sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["Preis"];
-            ?>
-            <input type="range" id="price" name="price" min="<?php  echo $min; ?>" max = "<?php  echo $max; ?>">
+            <select id="price" name="price">
+                <option selected value="*"></option>
+                <?php
+                $minstatement = "Select MIN(Preis) as Preis FROM CARS";
+                $maxstatement = "Select MAX(Preis) as Preis FROM Cars";
+                $minres = sqlsrv_query($conn, $minstatement);
+                $maxres = sqlsrv_query($conn, $maxstatement);
+                $min = round(sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["Preis"],-5);
+                $max = round(sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["Preis"],-5);
+                for ($price = $min; $price <= $max; $price += 5000 ){
+                echo "<option value =".$price.">".$price."</option>";
+                }
+                ?>
+            </select>
 
             <label for="kilometers">Kilometerstand</label>
             <select id="kilometers" name="kilometers">
@@ -81,10 +109,14 @@ function search_AI(){
                 }
                 ?>
             </select>
-
-
         </form>
-        
+        <?php
+        }else if($_GET["suchtyp"]=="KI"){
+            ?>
+
+        <?php
+        }
+        ?>
     </div>
 </body>
 </html>
