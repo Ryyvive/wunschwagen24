@@ -126,7 +126,10 @@ function search_AI(){
                 </select>
                 <h2>Wieviele Personen sollten mindestens in das Auto passen?</h2>
                 <label for="personen"></label>
-                <input type="number" max="9" name="personen" id="personen">
+                <input type="number" min="1" max="9" name="personen" id="personen">
+                <h2>Wieviel wollen Sie maximal für den Wagen ausgeben?</h2>
+                <label for="budget"></label>
+                <input type="number" min="1000"  name="budget" id="budget">
             </form>
         <?php
         }
