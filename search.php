@@ -55,7 +55,7 @@ function search_AI(){
                 ?>
             </select>
 
-            <label for="price">Preis</label>
+            <label for="price">Maximaler Preis</label>
             <?php
             $minstatement = "Select MIN(Preis) as Preis FROM CARS";
             $maxstatement = "Select MAX(Preis) as Preis FROM Cars";
@@ -66,7 +66,21 @@ function search_AI(){
             ?>
             <input type="range" id="price" name="price" min="<?php  echo $min; ?>" max = "<?php  echo $max; ?>">
 
-
+            <label for="kilometers">Kilometerstand</label>
+            <select id="kilometers" name="kilometers">
+                <option selected value="*"></option>
+                <?php
+                $minstatement = "Select MIN(kilometerstand) as kilometerstand FROM CARS";
+                $maxstatement = "Select MAX(kilometerstand) as kilometerstand FROM Cars";
+                $minres = sqlsrv_query($conn, $minstatement);
+                $maxres = sqlsrv_query($conn, $maxstatement);
+                $min = round(sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["kilometerstand"],-5);
+                $max = round(sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["kilometerstand"],-5);
+                for ($stand = $min; $stand <= $max; $stand += 5000 ){
+                    echo "<option value =".$stand.">".$stand."</option>";
+                }
+                ?>
+            </select>
 
 
         </form>
