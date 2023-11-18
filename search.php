@@ -36,9 +36,9 @@ function search_AI(){
     <div class="main-content">
 
         <?php
-        if (!isset($_GET["suchtyp"])){
+        if (!isset($_POST["suchtyp"])||$_POST["suchtyp"]=="NEU"){
             ?>
-            <form name="suchtyp-einstellung" method="get">
+            <form name="suchtyp-einstellung" method="POST">
                 <h1>Wie hätten Sie es gerne?</h1>
                 <p>Unsere Entwickler sind auf dem neusten Stand der Technik und bieten ihnen mit KI die Möglichkeit über ein paar Fragen das perfekte Auto zur Verfügung zu stellen.</p>
                 <h2>Sie wissen schon, was Sie suchen?</h2>
@@ -50,7 +50,7 @@ function search_AI(){
             </form>
 
         <?php
-        }else if($_GET["suchtyp"]=="ML"){
+        }else if($_POST["suchtyp"]=="ML"){
         ?>
             <h1> Deutschlands größte Gebrauchtswagen Datenbank</h1>
             <form class = "search" method = "POST" action="search.php">
@@ -111,9 +111,9 @@ function search_AI(){
                 </select>
             </form>
         <?php
-        }else if($_GET["suchtyp"]=="KI"){
+        }else if($_POST["suchtyp"]=="KI"){
             ?>
-            <form class = "search" method = "POST" action="search.php">
+            <form class = "search" method = "POST" action="search.php?">
                 <h1>Wie funktioniert unsere KI?</h1>
                 <p> Wir stellen Ihnen nun ein paar Fragen. Ihre Antworten werden anschließend analysiert und Sie bekommen die besten Gebrauchtwagen vorgeschlagen</p>
                 <h2>Wofür wollen Sie das Auto Nutzen?</h2>
@@ -133,9 +133,40 @@ function search_AI(){
                 <h2>Welche Getriebeart bevorzugen Sie?</h2>
                 <input type="radio" name="getriebe" id="auto" value="auto" checked /><label for="auto">Automatik</label>
                 <input type="radio" name="getriebe" id="manuel" value="manuel" /><label for="manuel">Schaltgetriebe</label>
+                <h2>Wie wichtig ist Ihnen eine hochwertige Innenausstatung?</h2>
+                <label for="innenausstatung"></label>
+                <select id="innenausstatung" name="innenausstatung">
+                    <option value ="1">Sehr wichtig - besonders hochwertig</option>
+                    <option value ="2">Eher wichtig</option>
+                    <option value ="3">Vernachlässigbar</option>
+                </select>
+                <h2>Welche Antriebsart soll ihr Auto haben?</h2>
+                <input type="checkbox" id="Autogas" name="Autogas" value="Autogas">
+                <label for="Autogas">Autogas</label><br>
+                <input type="checkbox" id="Diesel" name="Diesel" value="Diesel">
+                <label for="Diesel"> Diesel</label><br>
+                <input type="checkbox" id="Benzin" name="Benzin" value="Benzin">
+                <label for="Benzin"> Benzin</label><br>
+                <input type="checkbox" id="Elektrisch" name="Elektrisch" value="Elektrisch">
+                <label for="Elektrisch"> Elektrisch</label><br>
+                <h2>Benötige Leistung</h2>
+                <input type="number" name="leistung" id="leistung" max = "300">
+                <label for="leistung">PS</label>
+                <input type="hidden" name="suchtyp" id="suchtyp" value="DONE">
+                <h3>Alles gescheckt?</h3>
+                <input type="submit" value="Jetzt zum Traumauto">
             </form>
         <?php
-        }
+        }else if($_POST["suchtyp"]=="DONE"){
+            ?>
+            <h2>Nicht so voreilig</h2>
+            <p>Das Ergebnis der Suche kommt schon noch. Entwicklung braucht eben seine Zeit</p>
+            <form method="post">
+                <input type="hidden" name="suchtyp" id="suchtyp" value="NEU">
+                <input type="submit" value="Neue Suche!">
+            </form>
+            <?php
+            }
         ?>
     </div>
 </body>
