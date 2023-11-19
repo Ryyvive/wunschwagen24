@@ -18,20 +18,19 @@ function search_AI(): void
 
     ## auf Suche Exact zutreffen
     #TODO: Komplexe SQL Abfrage zum Suchen von genau passenden Angeboten
-    if($_SESSION["POST"]["suchtyp"]=="DONE-ML"){
+    if ($_SESSION["POST"]["suchtyp"] == "DONE-ML") {
         #TODO: Exakte Suche
-        $sql_search_exact = "Select * from dbo.cars where brand LIKE '".
-            $_SESSION["POST"]["brand"].
-            "' and model LIKE '".
-            $_SESSION["POST"]["model"].
-            "' and price <= ".
-            $_SESSION["POST"]["price"].
-            " and mileage <= ".
-            $_SESSION["POST"]["mileage"].
-            ""
-        ;
+        $sql_search_exact = "Select * from dbo.cars where brand LIKE '" .
+            $_SESSION["POST"]["brand"] .
+            "' and model LIKE '" .
+            $_SESSION["POST"]["model"] .
+            "' and price <= " .
+            $_SESSION["POST"]["price"] .
+            " and mileage <= " .
+            $_SESSION["POST"]["mileage"] .
+            "";
         $sql_result_exact = sqlsrv_query($sql_con, $sql_search_exact);
-        if($sql_result_exact && sqlsrv_has_rows($sql_result_exact)){
+        if ($sql_result_exact && sqlsrv_has_rows($sql_result_exact)) {
             ?>
             <h1>Ihre Suchergebnisse:</h1>
             <?php
@@ -39,22 +38,37 @@ function search_AI(): void
         }
         ?>
         <h1>Basierend auf ihrer Anfrage</h1>
-<?php
+        <?php
         #TODO: Empfehlungen
         #IDEE: Erst unwichitge Attrivute wegnehmen - bis modell, niemals typ
 
         ## For DEV purposes
         $sql_search_recommend = "Select * From dbo.cars";
         func_create_html_table($sql_search_recommend);
-    }else{
+    } else {
         ## AI zum Heraussuchen des am besten passenden Wagens
         #TODO: Bewertungsalgorithmus zum Bewerten (Scoring) welcher Wagen am besten geeignet ist
+        ##Übersetzung
+        $translastion_category = array(
+                1=>["'Kombi'","'SUV'","'Van'","'Minibus'"],
+            2=>["'Kleinwagen'","'Limousine'"],
+            3 => ["'Cabrio'","'Roadster'","'Sportwagen'","'Coupé'"],
+            4 => ["'Pickup'","'Van'","'Minibus'","'SUV'"],
+            5 => ["'Geländewagen'","'Pickup'","'SUV'"]
+        );
+        $sql_category = $translastion_category[$_SESSION["POST"]["nutzart"]];
+
+
+        $sql_search_recommend = "Select * From dbo.cars where category in (".
+            implode(",",$sql_category).
+            ")";
+        #echo $sql_search_recommend;
 
         ## For DEV purposes
-        $sql_search_recommend = "Select * From dbo.cars";
         func_create_html_table($sql_search_recommend);
     }
 }
+
 function func_create_html_table($sql_search_statement): void
 {
     $sql_con = sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
@@ -87,6 +101,7 @@ function func_create_html_table($sql_search_statement): void
     }
     echo "</table>";
 }
+
 ?>
 
 <html lang="DE">
@@ -96,7 +111,9 @@ function func_create_html_table($sql_search_statement): void
     <link rel="icon" href="branding/logo_small_icon_only.png">
 </head>
 <body>
-<header></header>
+<header>
+    <?php include("header.php") ?>
+</header>
 <div class="breaker"></div>
 <div class="main-content">
     <?php
@@ -192,9 +209,10 @@ function func_create_html_table($sql_search_statement): void
                 <label for="nutzart"></label>
                 <select id="nutzart" name="nutzart">
                     <option value="1">Familienfahrzeug</option>
-                    <option value="2">Pendeln</option>
-                    <option value="3">Wochenendfahrten</option>
-                    <option value="4">Saisonfahren</option>
+                    <option value="2">Stadtfahrzeug</option>
+                    <option value="3">Freizeit/Sport</option>
+                    <option value="4">Arbeitsfahrzeug</option>
+                    <option value="5">Abenteuer/Feldarbeit</option>
                 </select>
                 <h2>Wieviele Personen sollten mindestens in das Auto passen?</h2>
                 <label for="personen"></label>
@@ -238,13 +256,13 @@ function func_create_html_table($sql_search_statement): void
                 <input type="hidden" name="suchtyp" id="suchtyp" value="NEU">
                 <input type="submit" value="Neue Suche!">
             </form>
-                <?php
-                search_AI();
+            <?php
+            search_AI();
         }
     } else {
         ?>
         <button onclick="window.location.href='search.php?'">Zurück zur Suche</button>
-    <?php
+        <?php
     }
     ?>
 </div>

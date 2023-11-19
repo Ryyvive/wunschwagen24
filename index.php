@@ -9,33 +9,7 @@ session_start();
 </head>
 <body>
 <header>
-    <div class="topnav">
-        <table>
-            <tbody>
-            <tr>
-                <th>
-                    <img src="branding/logo_large.png" alt="">
-                </th>
-                <th>
-                    <a href="search.php">Suchen</a>
-                    <a href>Verkaufen</a>
-                    <a href>Beratung</a>
-                </th>
-                <th>
-                    <?php
-                    if(isset($_SESSION["vorname"])){
-                        echo "<a>Willkommen ".$_SESSION["vorname"]."</a>";
-                    }else{
-                        ?>
-                        <button onclick="window.location.href='login.php'">Anmelden</button>
-                    <?php
-                    }
-                    ?>
-                </th>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <?php include("header.php") ?>
 </header>
 <div class="breaker"></div>
 <div class="main-content">
@@ -85,7 +59,6 @@ session_start();
     <h2>
         WunschWagen24 - Gemeinsam machen wir Ihre Autoträume wahr.
     </h2>
-
 </div>
 </body>
 </html>
