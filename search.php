@@ -1,41 +1,65 @@
 <?php
 session_start();
 
-$serverName = "wunschwagen24-dbserver-dev.database.windows.net";
-$connectionOptions = array(
+$_SESSION["POST"] = $_POST;
+unset($_POST);
+$_SESSION["serverName"] = "wunschwagen24-dbserver-dev.database.windows.net";
+$_SESSION["connectionOptions"] = array(
     "Database" => "wunschwagen-db-dev",
     "Uid" => "CloudSA1cb8415e",
     "PWD" => "340Uuxwp7Mcxo7Khy"
 );
-$conn = sqlsrv_connect($serverName, $connectionOptions);
-if (isset($_POST["suchtyp"])) {
-    $_SESSION["POST"] = $_POST;
-    unset($_POST["suchtyp"]);
-}
-function search_AI()
+
+$conn = sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
+
+function search_AI(): void
 {
-    $serverName = "wunschwagen24-dbserver-dev.database.windows.net";
-    $connectionOptions = array(
-        "Database" => "wunschwagen-db-dev",
-        "Uid" => "CloudSA1cb8415e",
-        "PWD" => "340Uuxwp7Mcxo7Khy"
-    );
-    $con = sqlsrv_connect($serverName, $connectionOptions);
+    $sql_con = sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
 
     ## auf Suche Exact zutreffen
     #TODO: Komplexe SQL Abfrage zum Suchen von genau passenden Angeboten
-    if (isset($_POST["brand"])) {
-        $input_variable = array(
-            "brand" => $_POST["brand"],
-            "modell" => $_POST["modell"]
-        );
-    }
-    ## AI zum Heraussuchen des am besten passenden Wagens
-    #TODO: Bewertungsalgorithmus zum Bewerten (Scoring) welcher Wagen am besten geeignet ist
+    if($_SESSION["POST"]["suchtyp"]=="DONE-ML"){
+        #TODO: Exakte Suche
+        $sql_search_exact = "Select * from dbo.cars where brand LIKE '".
+            $_SESSION["POST"]["brand"].
+            "' and model LIKE '".
+            $_SESSION["POST"]["model"].
+            "' and price <= ".
+            $_SESSION["POST"]["price"].
+            " and mileage <= ".
+            $_SESSION["POST"]["mileage"].
+            ""
+        ;
+        $sql_result_exact = sqlsrv_query($sql_con, $sql_search_exact);
+        if($sql_result_exact && sqlsrv_has_rows($sql_result_exact)){
+            ?>
+            <h1>Ihre Suchergebnisse:</h1>
+            <?php
+            func_create_html_table($sql_search_exact);
+        }
+        ?>
+        <h1>Basierend auf ihrer Anfrage</h1>
+<?php
+        #TODO: Empfehlungen
+        #IDEE: Erst unwichitge Attrivute wegnehmen - bis modell, niemals typ
 
-    #Testing for Programming reasons
-    $test_sql = "Select * From dbo.cars";
-    $result = sqlsrv_query($con, $test_sql);
+        ## For DEV purposes
+        $sql_search_recommend = "Select * From dbo.cars";
+        func_create_html_table($sql_search_recommend);
+    }else{
+        ## AI zum Heraussuchen des am besten passenden Wagens
+        #TODO: Bewertungsalgorithmus zum Bewerten (Scoring) welcher Wagen am besten geeignet ist
+
+        ## For DEV purposes
+        $sql_search_recommend = "Select * From dbo.cars";
+        func_create_html_table($sql_search_recommend);
+    }
+}
+function func_create_html_table($sql_search_statement): void
+{
+    $sql_con = sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
+    $result = sqlsrv_query($sql_con, $sql_search_statement);
+    echo "<table>";
     while ($car = sqlsrv_fetch_array($result)) {
         echo "<tr>";
         #Bild des Autos
@@ -46,13 +70,13 @@ function search_AI()
         # Eigenschaften des Autos
         echo "<td>";
         echo "Marke: " . $car["brand"] . "<br>";
-        echo "Modell: " . $car["modell"] . "<br>";
-        echo "Preis: " . $car["preis"] . " €<br>";
+        echo "Modell: " . $car["model"] . "<br>";
+        echo "Preis: " . $car["price"] . " €<br>";
         echo "</td>";
         echo "<td>";
-        echo "Erstzulassung: " . $car["erstzulassung"]->format('Y') . "<br>";
-        echo "Leistung: " . $car["leistung"] . " PS<br>";
-        echo "Kraftstoff: " . $car["kraftstoff"] . "<br>";
+        echo "Erstzulassung: " . $car["registration"]->format('Y') . "<br>";
+        echo "Leistung: " . $car["power"] . " PS<br>";
+        echo "Kraftstoff: " . $car["fuel"] . "<br>";
         echo "</td>";
         ?>
         <td>
@@ -61,8 +85,8 @@ function search_AI()
         <?php
         echo "</tr>";
     }
+    echo "</table>";
 }
-
 ?>
 
 <html lang="DE">
@@ -101,7 +125,7 @@ function search_AI()
             <form class="search" method="POST" action="search.php">
                 <label for="brand">Marke</label>
                 <select id="brand" name="brand">
-                    <option selected value="*"></option>
+                    <option selected value="%"></option>
                     <?php
                     $sqlstatement = "SELECT DISTINCT brand from cars";
                     $res = sqlsrv_query($conn, $sqlstatement);
@@ -111,49 +135,51 @@ function search_AI()
                     ?>
                 </select>
 
-                <label for="modell">Modell</label>
-                <select id="modell" name="modell">
-                    <option selected value="*"></option>
+                <label for="model">Modell</label>
+                <select id="model" name="model">
+                    <option selected value="%"></option>
                     <?php
-                    $sqlstatement = "SELECT DISTINCT modell from cars";
+                    $sqlstatement = "SELECT DISTINCT model from dbo.cars";
                     $res = sqlsrv_query($conn, $sqlstatement);
                     while ($row = sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)) {
-                        echo "<option value =" . $row["modell"] . ">" . $row["modell"] . "</option>";
+                        echo "<option value =" . $row["model"] . ">" . $row["model"] . "</option>";
                     }
                     ?>
                 </select>
 
                 <label for="price">Maximaler Preis</label>
                 <select id="price" name="price">
-                    <option selected value="*"></option>
+                    <option selected value="1000000"></option>
                     <?php
-                    $minstatement = "Select MIN(Preis) as Preis FROM CARS";
-                    $maxstatement = "Select MAX(Preis) as Preis FROM Cars";
+                    $minstatement = "Select MIN(price) as price FROM dbo.cars";
+                    $maxstatement = "Select MAX(price) as price FROM dbo.cars";
                     $minres = sqlsrv_query($conn, $minstatement);
                     $maxres = sqlsrv_query($conn, $maxstatement);
-                    $min = round(sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["Preis"], -4);
-                    $max = round(sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["Preis"], -4);
+                    $min = round(sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["price"], -4);
+                    $max = round(sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["price"], -4);
                     for ($price = $min; $price <= $max; $price += 5000) {
                         echo "<option value =" . $price . ">" . $price . "</option>";
                     }
                     ?>
                 </select>
 
-                <label for="kilometers">Kilometerstand</label>
-                <select id="kilometers" name="kilometers">
-                    <option selected value="*"></option>
+                <label for="mileage">Kilometerstand</label>
+                <select id="mileage" name="mileage">
+                    <option selected value="1000000"></option>
                     <?php
-                    $minstatement = "Select MIN(kilometerstand) as kilometerstand FROM CARS";
-                    $maxstatement = "Select MAX(kilometerstand) as kilometerstand FROM Cars";
+                    $minstatement = "Select MIN(mileage) as mileage FROM CARS";
+                    $maxstatement = "Select MAX(mileage) as mileage FROM Cars";
                     $minres = sqlsrv_query($conn, $minstatement);
                     $maxres = sqlsrv_query($conn, $maxstatement);
-                    $min = round(sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["kilometerstand"], -5);
-                    $max = round(sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["kilometerstand"], -5);
+                    $min = round(sqlsrv_fetch_array($minres, SQLSRV_FETCH_ASSOC)["mileage"], -5);
+                    $max = round(sqlsrv_fetch_array($maxres, SQLSRV_FETCH_ASSOC)["mileage"], -5);
                     for ($stand = $min; $stand <= $max; $stand += 5000) {
                         echo "<option value =" . $stand . ">" . $stand . "</option>";
                     }
                     ?>
                 </select>
+                <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-ML">
+                <input type="submit" value="Zur Suche">
             </form>
             <?php
         } else if ($_SESSION["POST"]["suchtyp"] == "KI") {
@@ -199,12 +225,12 @@ function search_AI()
                 <h2>Benötige Leistung</h2>
                 <input type="number" name="leistung" id="leistung" max="300">
                 <label for="leistung">PS</label>
-                <input type="hidden" name="suchtyp" id="suchtyp" value="DONE">
+                <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-AI">
                 <h3>Alles gescheckt?</h3>
                 <input type="submit" value="Jetzt zum Traumauto">
             </form>
             <?php
-        } else if ($_SESSION["POST"]["suchtyp"] == "DONE") {
+        } else if ($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI") {
             ?>
             <h2>Nicht so voreilig</h2>
             <p>Das Ergebnis der Suche kommt schon noch. Entwicklung braucht eben seine Zeit</p>
@@ -212,13 +238,8 @@ function search_AI()
                 <input type="hidden" name="suchtyp" id="suchtyp" value="NEU">
                 <input type="submit" value="Neue Suche!">
             </form>
-            <table>
                 <?php
                 search_AI();
-                ?>
-            </table>
-
-            <?php
         }
     } else {
         ?>

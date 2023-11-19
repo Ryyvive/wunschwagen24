@@ -23,7 +23,7 @@ if (isset($_POST["email"]) && isset($_POST["vorname"]) && isset($_POST["nachname
         $valid = false;
         $login = false;
     }else{
-        $sql_insert = "INSERT INTO Customer (email, vorname, nachname, password) VALUES ('".$email."','".$vorname."','".$nachname."','".$password_user."')";
+        $sql_insert = "INSERT INTO cCustomer (email, vorname, nachname, password) VALUES ('".$email."','".$vorname."','".$nachname."','".$password_user."')";
         sqlsrv_query($conn, $sql_insert);
         $_SESSION["email"] = $email;
         $_SESSION["vorname"] = $vorname;
