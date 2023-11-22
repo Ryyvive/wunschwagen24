@@ -50,17 +50,17 @@ function search_AI(): void
         #TODO: Bewertungsalgorithmus zum Bewerten (Scoring) welcher Wagen am besten geeignet ist
         ##Übersetzung
         $translastion_category = array(
-                1=>["'Kombi'","'SUV'","'Van'","'Minibus'"],
-            2=>["'Kleinwagen'","'Limousine'"],
-            3 => ["'Cabrio'","'Roadster'","'Sportwagen'","'Coupé'"],
-            4 => ["'Pickup'","'Van'","'Minibus'","'SUV'"],
-            5 => ["'Geländewagen'","'Pickup'","'SUV'"]
+            1 => ["'Kombi'", "'SUV'", "'Van'", "'Minibus'"],
+            2 => ["'Kleinwagen'", "'Limousine'"],
+            3 => ["'Cabrio'", "'Roadster'", "'Sportwagen'", "'Coupé'"],
+            4 => ["'Pickup'", "'Van'", "'Minibus'", "'SUV'"],
+            5 => ["'Geländewagen'", "'Pickup'", "'SUV'"]
         );
         $sql_category = $translastion_category[$_SESSION["POST"]["nutzart"]];
 
 
-        $sql_search_recommend = "Select * From dbo.cars where category in (".
-            implode(",",$sql_category).
+        $sql_search_recommend = "Select * From dbo.cars where category in (" .
+            implode(",", $sql_category) .
             ")";
         #echo $sql_search_recommend;
 
@@ -205,6 +205,8 @@ function func_create_html_table($sql_search_statement): void
                 <h1>Wie funktioniert unsere KI?</h1>
                 <p> Wir stellen Ihnen nun ein paar Fragen. Ihre Antworten werden anschließend analysiert und Sie
                     bekommen die besten Gebrauchtwagen vorgeschlagen</p>
+                <h2>Sind Sie auf der Suche nach einem Fahrzeug für den täglichen Pendelverkehr oder eher für gelegentliche Ausflüge/Wochenendfahrten?</h2>
+                <!--TODO-->
                 <h2>Wofür wollen Sie das Auto Nutzen?</h2>
                 <label for="nutzart"></label>
                 <select id="nutzart" name="nutzart">
@@ -214,6 +216,12 @@ function func_create_html_table($sql_search_statement): void
                     <option value="4">Arbeitsfahrzeug</option>
                     <option value="5">Abenteuer/Feldarbeit</option>
                 </select>
+                <h2>
+                    Bevorzugen Sie einen sparsamen Kraftstoffverbrauch oder legen Sie Wert auf Leistung und Fahrspaß?
+                </h2>
+                <!--TODO-->
+                <h2>Wie wichtig ist es für Sie, dass die Wartungs- und Reparaturkosten niedrig sind?</h2>
+                <!--TODO-->
                 <h2>Wieviele Personen sollten mindestens in das Auto passen?</h2>
                 <label for="personen"></label>
                 <input type="number" min="1" max="9" name="personen" id="personen" value="1">
@@ -231,7 +239,7 @@ function func_create_html_table($sql_search_statement): void
                     <option value="2">Eher wichtig</option>
                     <option value="3">Vernachlässigbar</option>
                 </select>
-                <h2>Welche Antriebsart soll ihr Auto haben?</h2>
+                <h2>Welchen Energieträger soll ihr Auto haben?</h2>
                 <input type="checkbox" id="Autogas" name="Autogas" value="Autogas">
                 <label for="Autogas">Autogas</label><br>
                 <input type="checkbox" id="Diesel" name="Diesel" value="Diesel">
@@ -243,6 +251,8 @@ function func_create_html_table($sql_search_statement): void
                 <h2>Benötige Leistung</h2>
                 <input type="number" name="leistung" id="leistung" max="300">
                 <label for="leistung">PS</label>
+                <h2>Haben Sie eine bevorzugte Fahrzeugfarbe oder sind Sie offen für verschiedene Optionen?</h2>
+                <!--TODO-->
                 <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-AI">
                 <h3>Alles gescheckt?</h3>
                 <input type="submit" value="Jetzt zum Traumauto">
