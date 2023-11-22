@@ -3,3 +3,34 @@ Sekundärfarbe: #FFA500 (ein auffälliges Orange, um Aufmerksamkeit zu erregen u
 Akzentfarbe: #66CC33 (ein frisches Grün, das Nachhaltigkeit und Zuverlässigkeit symbolisiert)
 Hintergrundfarbe: #F5F5F5 (ein helles Grau, um eine saubere und moderne Ästhetik zu fördern)
 Textfarbe: #333333 (dunkles Grau, das für gute Lesbarkeit sorgt)
+
+
+
+Datenbankbeschreibung
+transmission - Mögliche Antworten: Automatik, Schaltgetriebe
+trailer - Mögliche Antworten: fest, keine, abnehmbar
+seats - Anzahl Sitzplätze
+registration - Datum Erstzulassung
+price - Nettowert des Fahrzuegs
+power - PS des Fahrzeugs
+pollutantclass - Schadstoffklasse (EU Regel)
+owners - Bisherige Fahrzeughalter
+model - Modell des Fahrzeugs
+mileage - Kilometerstand
+inspection - Datum der letzte Hauptuntersuchung
+indentnumber - Fahrzeugnummer
+fuel - Mögliche Antworten [Diesel, Benzin, Elektrisch, Autogas]
+energieefficiency - Energieeffizienzklasse
+doors - Anzahl der Türen
+cruisecontrol - Mögliche Antwortmöglickeiten [Tempomat, adaptiv]
+consumption - durchschnittlicher Kraftstoffverbrauch
+colorinside - Farbe der Innenaustattung
+color - Farbe des Fahrzeugs
+ccm - Hubraum des Fahrzeugs
+category - Gahrzeugtyp [Kombi,SUV,Van,Minibus,Kleinwagen,Limousine,Cabrio,Roadster,Sportwagen,Coupé,Pickup,Geländewagen,Pickup]
+brand - Marke des Autos
+airbag - Mögliche Antworten ["Fahrer-Airbag",
+                             "Front-Airbags",
+                             "Front- und Seiten-Airbags",
+                             "Front-, Seiten- und weitere Airbags"]
+ac - Mögliche Antwortern [Klimaanlage oder -automatik,Klimaautomatik,2-Zonen-Klimaautomatik,3-Zonen-Klimaautomatik,4-Zonen-Klimaautomatik, Keine Klimaautomatik]

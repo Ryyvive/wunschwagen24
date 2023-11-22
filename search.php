@@ -206,7 +206,8 @@ function func_create_html_table($sql_search_statement): void
                 <p> Wir stellen Ihnen nun ein paar Fragen. Ihre Antworten werden anschließend analysiert und Sie
                     bekommen die besten Gebrauchtwagen vorgeschlagen</p>
                 <h2>Sind Sie auf der Suche nach einem Fahrzeug für den täglichen Pendelverkehr oder eher für gelegentliche Ausflüge/Wochenendfahrten?</h2>
-                <!--TODO-->
+                <input type="radio" name="usecase" id="pendeln" value="pendeln" checked/><label for="pendeln">Täglicher Pendelverkehr</label>
+                <input type="radio" name="usecase" id="gelegentlich" value="gelegentlich"/><label for="gelegentlich">Ausflüge/Wochenendfahrten</label>
                 <h2>Wofür wollen Sie das Auto Nutzen?</h2>
                 <label for="nutzart"></label>
                 <select id="nutzart" name="nutzart">
@@ -219,9 +220,15 @@ function func_create_html_table($sql_search_statement): void
                 <h2>
                     Bevorzugen Sie einen sparsamen Kraftstoffverbrauch oder legen Sie Wert auf Leistung und Fahrspaß?
                 </h2>
-                <!--TODO-->
+                <input type="radio" name="sparsamkeit" id="consumption" value="consumption" checked/><label for="consumption">Sparsamer Kraftstoffverbrauch</label>
+                <input type="radio" name="sparsamkeit" id="power" value="power"/><label for="power">Leistung und Fahrspaß</label>
                 <h2>Wie wichtig ist es für Sie, dass die Wartungs- und Reparaturkosten niedrig sind?</h2>
-                <!--TODO-->
+                <label for="lifespan"></label>
+                <select id="lifespan" name="lifespan">
+                    <option value="1">Sehr wichtig</option>
+                    <option value="2">Eher wichtig</option>
+                    <option value="3">Vernachlässigbar</option>
+                </select>
                 <h2>Wieviele Personen sollten mindestens in das Auto passen?</h2>
                 <label for="personen"></label>
                 <input type="number" min="1" max="9" name="personen" id="personen" value="1">
@@ -230,8 +237,7 @@ function func_create_html_table($sql_search_statement): void
                 <input type="number" min="1000" name="budget" id="budget" value="1000" step="1000">
                 <h2>Welche Getriebeart bevorzugen Sie?</h2>
                 <input type="radio" name="getriebe" id="auto" value="auto" checked/><label for="auto">Automatik</label>
-                <input type="radio" name="getriebe" id="manuel" value="manuel"/><label
-                        for="manuel">Schaltgetriebe</label>
+                <input type="radio" name="getriebe" id="manuel" value="manuel"/><label for="manuel">Schaltgetriebe</label>
                 <h2>Wie wichtig ist Ihnen eine hochwertige Innenausstatung?</h2>
                 <label for="innenausstatung"></label>
                 <select id="innenausstatung" name="innenausstatung">
@@ -251,8 +257,6 @@ function func_create_html_table($sql_search_statement): void
                 <h2>Benötige Leistung</h2>
                 <input type="number" name="leistung" id="leistung" max="300">
                 <label for="leistung">PS</label>
-                <h2>Haben Sie eine bevorzugte Fahrzeugfarbe oder sind Sie offen für verschiedene Optionen?</h2>
-                <!--TODO-->
                 <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-AI">
                 <h3>Alles gescheckt?</h3>
                 <input type="submit" value="Jetzt zum Traumauto">
