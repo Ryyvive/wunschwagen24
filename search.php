@@ -79,7 +79,9 @@ function func_create_html_table($sql_search_statement): void
         #Bild des Autos
         #TODO: API Anbindung
         echo "<td>";
-        echo "Kein Bild verfügbar";
+        echo "<div class=pictureres>";
+        echo "<img src='cars/". $car["brand"] . $car["model"] .".jpg' alt=''>";
+        echo "</div>";
         echo "</td>";
         # Eigenschaften des Autos
         echo "<td>";
