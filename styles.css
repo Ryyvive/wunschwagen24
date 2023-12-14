@@ -227,3 +227,47 @@ header{
     height: 50px;
     width: 100px;
 }
+.container_animation {
+    position:absolute;
+    left:45%;
+    top: 30%;
+    height: 400px;
+    width:400px;
+}
+.progressbar{
+    height: 26px;
+    position: absolute;
+    left: 25%;
+    top: 110px;;
+    width: 300px;
+    background: var(--main-color);
+    border-radius: 10px;
+    margin: -20px 0 0 -100px;
+    padding: 2px;
+}
+.loading{
+    transition: all 500ms ease;
+    height: 20px;
+    width: calc(100% - 10px);
+    border-radius: 8px;
+    background: var(--background-color);
+    position: absolute;
+    margin: 3px;
+    display: inline-block;
+    animation: load 15s ease infinite;
+}
+.load{
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+}
+
+@keyframes load{
+    0%{
+        width: 2%;
+    }
+    10%{
+        width: 10%;
+    }
+}

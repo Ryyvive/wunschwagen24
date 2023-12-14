@@ -1,7 +1,9 @@
 <?php
 session_start();
-
+var_dump($_SESSION);
+if(isset($_POST["suchtyp"])){
 $_SESSION["POST"] = $_POST;
+}
 unset($_POST);
 $_SESSION["serverName"] = "wunschwagen24-dbserver-dev.database.windows.net";
 $_SESSION["connectionOptions"] = array(
@@ -260,11 +262,23 @@ function func_create_html_table($sql_search_statement): void
                 <input type="number" name="leistung" id="leistung" max="300">
                 <label for="leistung">PS</label>
                 <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-AI">
+                <input type="hidden" name="waiting" id="waiting" value="load">
                 <h3>Alles gescheckt?</h3>
                 <input type="submit" value="Jetzt zum Traumauto">
             </form>
             <?php
-        } else if ($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI") {
+        } else if (($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI") && $_SESSION["POST"]["waiting"] == "load") {
+            ?>
+            <div class="container_animation">
+                <div class="progressbar">
+                    <span class="loading"></span>
+                    <p class="load"><p>Loading...</p>
+                </div>
+            </div>
+            <?php
+            $_SESSION["POST"]["waiting"] = "noload";
+            header("Refresh:10");
+            } else if ($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI"){
             ?>
             <h2>Nicht so voreilig</h2>
             <p>Das Ergebnis der Suche kommt schon noch. Entwicklung braucht eben seine Zeit</p>
