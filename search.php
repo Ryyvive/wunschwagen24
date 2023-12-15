@@ -168,10 +168,13 @@ if (isset($_GET["ai"])) {
                 <h2>Sie wissen schon, was Sie suchen?</h2>
                 <p>Auch das ist kein Problem. Mit einfachen Filtern ermöglichen wir Ihnen Zugriff auf Deutschlands
                     größte Gebrauchtwagendatenbank.</p>
-                <input type="radio" name="suchtyp" id="KI" value="KI" checked/><label for="KI">Ich möchte mich beraten
-                    lassen</label>
-                <input type="radio" name="suchtyp" id="ML" value="ML"/><label for="ML">Ich weiß, wonach ich
-                    suche</label>
+                <fieldset class="toggle">
+                    <input type="radio" name="suchtyp" id="KI" value="KI" checked/>
+                    <label for="KI">Ich möchte mich beraten lassen</label>
+
+                    <input type="radio" name="suchtyp" id="ML" value="ML"/>
+                    <label for="ML">Ich weiß, wonach ich suche</label>
+                </fieldset>
                 <br>
                 <input type="submit" value="Auf geht's">
             </form>
@@ -247,11 +250,13 @@ if (isset($_GET["ai"])) {
                 <p> Wir stellen Ihnen nun ein paar Fragen. Ihre Antworten werden anschließend analysiert und Sie
                     bekommen die besten Gebrauchtwagen vorgeschlagen</p>
                 <h2>Sind Sie auf der Suche nach einem Fahrzeug für den täglichen Pendelverkehr oder eher für gelegentliche Ausflüge/Wochenendfahrten?</h2>
-                <input type="radio" name="usecase" id="pendeln" value="pendeln" checked/><label for="pendeln">Täglicher Pendelverkehr</label>
-                <input type="radio" name="usecase" id="gelegentlich" value="gelegentlich"/><label for="gelegentlich">Ausflüge/Wochenendfahrten</label>
+                <fieldset class="toggle">
+                    <input type="radio" name="usecase" id="pendeln" value="pendeln" checked/><label for="pendeln">Täglicher Pendelverkehr</label>
+                    <input type="radio" name="usecase" id="gelegentlich" value="gelegentlich"/><label for="gelegentlich">Ausflüge/Wochenendfahrten</label>
+                </fieldset>
                 <h2>Wofür wollen Sie das Auto Nutzen?</h2>
                 <label for="nutzart"></label>
-                <select id="nutzart" name="nutzart">
+                <select id="nutzart" name="nutzart" class="custom-dropdown">
                     <option value="1">Familienfahrzeug</option>
                     <option value="2">Stadtfahrzeug</option>
                     <option value="3">Freizeit/Sport</option>
@@ -261,45 +266,71 @@ if (isset($_GET["ai"])) {
                 <h2>
                     Bevorzugen Sie einen sparsamen Kraftstoffverbrauch oder legen Sie Wert auf Leistung und Fahrspaß?
                 </h2>
-                <input type="radio" name="sparsamkeit" id="consumption" value="consumption" checked/><label for="consumption">Sparsamer Kraftstoffverbrauch</label>
-                <input type="radio" name="sparsamkeit" id="power" value="power"/><label for="power">Leistung und Fahrspaß</label>
+                <fieldset class="toggle">
+                    <input type="radio" name="sparsamkeit" id="consumption" value="consumption" checked/><label for="consumption">Sparsamer Kraftstoffverbrauch</label>
+                    <input type="radio" name="sparsamkeit" id="power" value="power"/><label for="power">Leistung und Fahrspaß</label>
+                </fieldset>
                 <h2>Wie wichtig ist es für Sie, dass die Wartungs- und Reparaturkosten niedrig sind?</h2>
                 <label for="lifespan"></label>
-                <select id="lifespan" name="lifespan">
+                <select id="lifespan" name="lifespan" class="custom-dropdown">
                     <option value="1">Sehr wichtig</option>
                     <option value="2">Eher wichtig</option>
                     <option value="3">Vernachlässigbar</option>
                 </select>
                 <h2>Wieviele Personen sollten mindestens in das Auto passen?</h2>
                 <label for="personen"></label>
-                <input type="number" min="1" max="9" name="personen" id="personen" value="1">
+                <input type="number" min="1" max="9" name="personen" id="personen" value="1" class="custom-number">
                 <h2>Wieviel wollen Sie maximal für den Wagen ausgeben?</h2>
-                <label for="budget"></label>
-                <input type="number" min="1000" name="budget" id="budget" value="1000" step="1000">
+                <input type="number" min="1000" name="budget" id="budget" value="1000" step="1000" class="custom-number">
+                <label for="budget">€</label>
                 <h2>Welche Getriebeart bevorzugen Sie?</h2>
-                <input type="radio" name="getriebe" id="auto" value="auto" checked/><label for="auto">Automatik</label>
-                <input type="radio" name="getriebe" id="manuel" value="manuel"/><label for="manuel">Schaltgetriebe</label>
+                <fieldset class="toggle">
+                    <input type="radio" name="getriebe" id="auto" value="auto" checked/><label for="auto">Automatik</label>
+                    <input type="radio" name="getriebe" id="manuel" value="manuel"/><label for="manuel">Schaltgetriebe</label>
+                </fieldset>
                 <h2>Wie wichtig ist Ihnen eine hochwertige Innenausstatung?</h2>
                 <label for="innenausstatung"></label>
-                <select id="innenausstatung" name="innenausstatung">
+                <select id="innenausstatung" name="innenausstatung" class="custom-dropdown">
                     <option value="1">Sehr wichtig - besonders hochwertig</option>
                     <option value="2">Eher wichtig</option>
                     <option value="3">Vernachlässigbar</option>
                 </select>
                 <h2>Welchen Energieträger soll ihr Auto haben?</h2>
-                <input type="checkbox" id="Autogas" name="Autogas" value="Autogas">
-                <label for="Autogas">Autogas</label><br>
-                <input type="checkbox" id="Diesel" name="Diesel" value="Diesel">
-                <label for="Diesel"> Diesel</label><br>
-                <input type="checkbox" id="Benzin" name="Benzin" value="Benzin">
-                <label for="Benzin"> Benzin</label><br>
-                <input type="checkbox" id="Elektrisch" name="Elektrisch" value="Elektrisch">
-                <label for="Elektrisch"> Elektrisch</label><br>
+                <section class="app">
+                    <article class="custom-checkbox">
+                        <input type="checkbox" id="Autogas" name="Autogas" value="Autogas">
+                        <div>
+                            <span>Autogas</span>
+                        </div>
+                    </article><br>
+
+                    <article class="custom-checkbox">
+                        <input type="checkbox" id="Diesel" name="Diesel" value="Diesel">
+                        <div>
+                            <span>Diesel</span>
+                        </div>
+                    </article><br>
+
+                    <article class="custom-checkbox">
+                        <input type="checkbox" id="Benzin" name="Benzin" value="Benzin">
+                        <div>
+                            <span>Benzin</span>
+                        </div>
+                    </article><br>
+
+                    <article class="custom-checkbox">
+                        <input type="checkbox" id="Elektrisch" name="Elektrisch" value="Elektrisch">
+                        <div>
+                            <span>Elektrisch</span>
+                        </div>
+                    </article><br>
+                </section>
                 <h2>Benötige Leistung</h2>
-                <input type="number" name="leistung" id="leistung" max="300">
+                <input type="number" name="leistung" id="leistung" max="300" class="custom-number">
                 <label for="leistung">PS</label>
                 <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-AI">
-                <h3>Alles gescheckt?</h3>
+                <br><br>
+                <h3>Alles gecheckt?</h3>
                 <input type="submit" value="Jetzt zum Traumauto">
             </form>
             <?php

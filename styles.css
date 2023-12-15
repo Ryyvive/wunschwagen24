@@ -89,7 +89,7 @@ header{
     transition: all 0.5s ease-in-out;
 }
 .topnav button:hover {
-    box-shadow: 1px 1px 200px var(--main-color);
+    box-shadow: 1px 1px 100px var(--main-color);
     color: #fff;
     border: none;
 }
@@ -286,4 +286,300 @@ header{
     margin-right: auto;
     height:300px;
     max-width: 300px;
+}
+
+/* Button Search */
+
+input[type=submit] {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: var(--main-color);
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type=submit]:hover {
+    background-color: var(--secundary-color);
+    box-shadow: 0px 15px 20px #fcba45;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+input[type=submit]:active {
+    transform: translateY(-1px);
+}
+
+/* Toggle Search */
+fieldset {
+    box-sizing: border-box; display: block;
+    border: none;
+    min-width: 0;
+}
+
+fieldset legend {
+    margin: 0 0 1.5rem; padding: 0;
+    width: 100%; float: left; display: table;
+    font-size: 1.5rem; line-height: 140%; font-weight: 600; color: #333;
+}
+
+fieldset legend + * {
+    clear: both;
+}
+
+body:not(:-moz-handler-blocked) fieldset {
+    display: table-cell;
+}
+
+.toggle {
+    margin: 0 0 1.5rem; box-sizing: border-box;
+    font-size: 0;
+    display: flex; flex-flow: row nowrap;
+    justify-content: flex-start; align-items: stretch;
+}
+
+.toggle input {
+    width: 0; height: 0; position: absolute; left: -9999px;
+}
+
+.toggle input + label {
+    margin: 0; padding: .75rem 2rem; box-sizing: border-box;
+    position: relative; display: inline-block;
+    border: solid 1px #DDD; background-color: #FFF; color: var(--secundary-color);
+    font-size: 1rem; line-height: 140%; font-weight: 600; text-align: center;
+    box-shadow: 0 0 0 rgba(255,255,255,0);
+    transition: border-color .15s ease-out,
+    color .25s ease-out,
+    background-color .15s ease-out,
+    box-shadow .15s ease-out;
+}
+
+.toggle input + label:first-of-type {
+    border-radius: 6px 0 0 6px; border-right: none;
+}
+
+.toggle input + label:last-of-type {
+    border-radius: 0 6px 6px 0; border-left: none;
+}
+
+.toggle input:hover + label {
+    border-color: var(--main-color);
+}
+
+.toggle input:checked + label {
+    background-color: var(--main-color);
+    color: #FFF;
+    box-shadow: 0 0 10px rgba(102, 179, 251, .5);
+    border-color: #4B9DEA;
+    z-index: 1;
+}
+
+@media (max-width: 800px) {
+    fieldset .toggle input + label {
+        padding: .75rem .25rem;
+        flex: 0 0 50%;
+        display: flex; justify-content: center; align-items: center;
+    }
+}
+
+.status {
+    margin: 0;
+    font-size: 1rem; font-weight: 400;
+}
+
+.status span {
+    font-weight: 600; color: #B6985A;
+}
+
+.status span:first-of-type {
+    display: inline;
+}
+
+.status span:last-of-type {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    fieldset .status span:first-of-type {
+        display: none;
+    }
+
+    fieldset .status span:last-of-type {
+        display: inline;
+    }
+}
+
+/* Dropdown Search */
+.custom-dropdown {
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="12" viewBox="0 0 14 12" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" stroke="orange" stroke-width="2" fill="none" fill-rule="evenodd"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem top 50%;
+}
+
+.custom-dropdown:hover {
+    border-color: #bbb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-dropdown:focus {
+    outline: none;
+    border-color: #66B3FB;
+    box-shadow: 0 0 0 2px rgba(102, 179, 251, 0.5);
+}
+
+.custom-dropdown option {
+    background-color: var(--main-color); /* Hintergrundfarbe der Optionen */
+    color: #ffffff; /* Textfarbe der Optionen */
+}
+
+/* Number Search */
+.custom-number {
+    padding: 0.5rem 1rem; /* Polsterung für bessere Greifbarkeit */
+    font-size: 1rem; /* Lesbare Schriftgröße */
+    border: 1px solid #ddd; /* Dezente Grenzlinie */
+    border-radius: 4px; /* Abgerundete Ecken für modernes Aussehen */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Tiefe */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Glatter Übergang für Hover-Effekte */
+}
+
+.custom-number:hover {
+    border-color: #bbb; /* Farbänderung beim Hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Intensiverer Schatten beim Hover */
+}
+
+.custom-number:focus {
+    outline: none; /* Entfernen des Standard-Outlines beim Fokus */
+    border-color: var(--main-color); /* Hervorhebung bei Fokus */
+    box-shadow: 0 0 0 2px rgba(102, 179, 251, 0.5); /* Schatten um das fokussierte Element */
+}
+
+.custom-number::-webkit-inner-spin-button,
+.custom-number::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.custom-number::-moz-focus-inner {
+    border: 0;
+}
+
+/* Checkbox Search */
+.app {
+    max-width: 300px;
+    display: flex; /* Flexbox-Layout aktivieren */
+    flex-wrap: wrap; /* Erlaube das Umfließen auf eine neue Zeile */
+    justify-content: space-between; /* Gleichmäßiger Abstand zwischen den Elementen */
+}
+
+.app i {
+    font-size: 80px;
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: 1;
+}
+
+article {
+    position: relative;
+    width: calc(50% - 10px); /* 50% der Elternbreite minus Abstand */
+    height: 4rem;
+    margin: 5px 0; /* Vertikaler Abstand zwischen den Zeilen */
+    border: 2px solid var(--main-color);
+    box-sizing: border-box;
+    background-color: white;
+}
+
+article:hover {
+    border: 2px solid var(--secundary-color);
+}
+
+article div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 25px;
+    transition: .5s ease;
+}
+
+article input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: 100px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+input[type=checkbox]:checked ~ div {
+    background-color: var(--main-color);
+}
+
+.upgrade-btn {
+    display: block;
+    margin: 30px auto;
+    width: 200px;
+    padding: 10px 20px;
+    border: 2px solid #50bcf2;
+    border-radius: 50px;
+    color: #f5f5f5;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.upgrade-btn:hover {
+    background-color: #50bcf2;
+}
+
+.blue-color {
+    color: #50bcf2;
+}
+
+.gray-color {
+    color: #555;
+}
+
+.social i:before {
+    width: 14px;
+    height: 14px;
+    position: fixed;
+    color: #fff;
+    background: #0077B5;
+    padding: 10px;
+    border-radius: 50%;
+    top:5px;
+    right:5px;
+}
+
+@keyframes slidein {
+    from {
+        margin-top: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin: 0%;
+        width: 100%;
+    }
 }
