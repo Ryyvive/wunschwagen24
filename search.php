@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SERVER);
 if(isset($_POST["suchtyp"])){
 $_SESSION["POST"] = $_POST;
 }
