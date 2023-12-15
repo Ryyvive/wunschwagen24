@@ -11,10 +11,10 @@ $connectionOptions = array(
 );
 
 $conn = sqlsrv_connect($_SERVER["APPSETTING_serverName"], $connectionOptions);
-
-function search_AI($options): void
+function search_AI($conn): void
 {
-    $sql_con = sqlsrv_connect($_SERVER["APPSETTING_serverName"], $options);
+    var_dump($conn);
+    $sql_con = $conn;#sqlsrv_connect($_SERVER["APPSETTING_serverName"], $options);
 
     ## auf Suche Exact zutreffen
     #TODO: Komplexe SQL Abfrage zum Suchen von genau passenden Angeboten
@@ -65,13 +65,13 @@ function search_AI($options): void
         #echo $sql_search_recommend;
 
         ## For DEV purposes
-        func_create_html_table($sql_search_recommend);
+        func_create_html_table($sql_search_recommend,$conn);
     }
 }
 
-function func_create_html_table($sql_search_statement): void
+function func_create_html_table($sql_search_statement,$conn): void
 {
-    $sql_con = sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
+    $sql_con = $conn;#sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
     $result = sqlsrv_query($sql_con, $sql_search_statement);
     echo "<table>";
     while ($car = sqlsrv_fetch_array($result)) {
@@ -285,7 +285,7 @@ function func_create_html_table($sql_search_statement): void
                 <input type="submit" value="Neue Suche!">
             </form>
             <?php
-            search_AI($connectionOptions);
+            search_AI($conn);
         }
     } else {
         ?>
