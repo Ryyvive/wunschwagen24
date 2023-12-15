@@ -11,6 +11,8 @@ session_start();
 <header>
     <?php include("header.php") ?>
 </header>
+<div class="breaker"></div>
+<div class="main-content">
 <div class="teaminfo">
     <table>
         <tr>
@@ -19,6 +21,7 @@ session_start();
             </td>
             <td>
                 Herr Kunze ist Berater bei uns seit 2023!
+                <button>Hier einen Termin vereinbaren</button>
             </td>
         </tr>
         <tr>
@@ -54,5 +57,6 @@ session_start();
             </td>
         </tr>
     </table>
+</div>
 </div>
 </html>

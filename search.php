@@ -30,23 +30,20 @@ function search_AI($conn): void
             $_SESSION["POST"]["price"] .
             " and mileage <= " .
             $_SESSION["POST"]["mileage"] .
-            "";
+            "Order by Price asc";
         $sql_result_exact = sqlsrv_query($sql_con, $sql_search_exact);
         if ($sql_result_exact && sqlsrv_has_rows($sql_result_exact)) {
-            ?>
-            <h1>Ihre Suchergebnisse:</h1>
-            <?php
-            func_create_html_table($sql_search_exact);
-        }
-        ?>
-        <h1>Basierend auf ihrer Anfrage</h1>
-        <?php
-        #TODO: Empfehlungen
-        #IDEE: Erst unwichitge Attrivute wegnehmen - bis modell, niemals typ
+            echo "<h1>Ihre Suchergebnisse:</h1>";
+            func_create_html_table($sql_search_exact, $conn);
+        }else{
+            echo "<h1>Basierend auf ihrer Anfrage</h1>";
+            #TODO: Empfehlungen
+            #IDEE: Erst unwichitge Attrivute wegnehmen - bis modell, niemals typ
 
-        ## For DEV purposes
-        $sql_search_recommend = "Select * From dbo.cars";
-        func_create_html_table($sql_search_recommend);
+            ## For DEV purposes
+            $sql_search_recommend = "Select TOP 100 * From dbo.cars";
+            func_create_html_table($sql_search_recommend, $conn);
+            }
     } else {
         ## AI zum Heraussuchen des am besten passenden Wagens
         #TODO: Bewertungsalgorithmus zum Bewerten (Scoring) welcher Wagen am besten geeignet ist
@@ -60,13 +57,42 @@ function search_AI($conn): void
         );
         $sql_category = $translastion_category[$_SESSION["POST"]["nutzart"]];
 
+        #usecase
+        #TODO
+        if($_SESSION["POST"]["usecase"] == "pendeln"){
+            $usecase = "";
+        }else{
+            $usecase = "";
+        }
 
-        $sql_search_recommend = "Select * From dbo.cars where category in (" .
+        #sparsamkeit
+        if($_SESSION["POST"]["sparsamkeit"]=="consumption"){
+            $sort = "Order by consumtion asc";
+        }else{
+            $sort = "Order by power desc";
+        }
+        #lifespan
+        #TODO
+
+        #personen
+        #TODO
+        $personen = " seats >= ".$_SESSION["POST"]["personen"];
+
+        #budget
+        #TODO
+
+        #getriebe
+        #TODO
+
+        #innenausstattung
+        #TODO
+
+        #Energieträger
+        #TODO
+
+        $sql_search_recommend = "Select TOP 100 * From dbo.cars where category in (" .
             implode(",", $sql_category) .
-            ")";
-        #echo $sql_search_recommend;
-
-        ## For DEV purposes
+            ") and ".$personen;
         func_create_html_table($sql_search_recommend,$conn);
     }
 }
