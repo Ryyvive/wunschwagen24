@@ -6,15 +6,14 @@ if (isset($_POST["email"]) && isset($_POST["password"])){
     $email = htmlspecialchars($_POST["email"]);
     $password_user = htmlspecialchars($_POST["password"]);
 
-    $sql_check_mail = "SELECT vorname FROM cCustomer WHERE email = '".$email. "' and password = '".$password_user."'";
-    $serverName = "wunschwagen24-dbserver-dev.database.windows.net";
+    $sql_check_mail = "SELECT vorname FROM customer WHERE email = '".$email. "' and password = '".$password_user."'";
     $connectionOptions = array(
-        "Database" => "wunschwagen-db-dev",
-        "Uid" => "CloudSA1cb8415e",
-        "PWD" => "340Uuxwp7Mcxo7Khy"
+        "Database" => $_SERVER["APPSETTING_Database"],
+        "Uid" =>  $_SERVER["APPSETTING_Uid"],
+        "PWD" =>  $_SERVER["APPSETTING_PWD"]
     );
 
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
+    $conn = sqlsrv_connect($_SERVER["APPSETTING_serverName"], $connectionOptions);
     $res = sqlsrv_query($conn, $sql_check_mail);
     if(sqlsrv_has_rows($res)){
         $_SESSION["vorname"]=sqlsrv_fetch_array($res, SQLSRV_FETCH_ASSOC)["vorname"];

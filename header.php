@@ -3,7 +3,11 @@
         <tbody>
         <tr>
             <th>
-                <img src="branding/logo_large.png" alt="">
+                <div class="backimg">
+                <a href="index.php" class="backimg">
+                    <img src="branding/logo_large.png" alt="">
+                </a>
+                </div>
             </th>
             <th>
                 <a href="search.php">Suchen</a>

@@ -9,21 +9,19 @@ if (isset($_POST["email"]) && isset($_POST["vorname"]) && isset($_POST["nachname
     $password_user = htmlspecialchars($_POST["password"]);
 
     $sql_check_mail = "SELECT email FROM customer WHERE email = '".$email. "'";
-    $serverName = "wunschwagen24-dbserver-dev.database.windows.net"; // update me
     $connectionOptions = array(
-        "Database" => "wunschwagen-db-dev", // update me
-        "Uid" => "CloudSA1cb8415e", // update me
-        "PWD" => "340Uuxwp7Mcxo7Khy" // update me
+        "Database" => $_SERVER["APPSETTING_Database"],
+        "Uid" =>  $_SERVER["APPSETTING_Uid"],
+        "PWD" =>  $_SERVER["APPSETTING_PWD"]
     );
 
-// Create connection
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
+    $conn = sqlsrv_connect($_SERVER["APPSETTING_serverName"], $connectionOptions);
     $res = sqlsrv_query($conn, $sql_check_mail);
     if(sqlsrv_has_rows($res)){
         $valid = false;
         $login = false;
     }else{
-        $sql_insert = "INSERT INTO cCustomer (email, vorname, nachname, password) VALUES ('".$email."','".$vorname."','".$nachname."','".$password_user."')";
+        $sql_insert = "INSERT INTO customer (email, vorname, nachname, password) VALUES ('".$email."','".$vorname."','".$nachname."','".$password_user."')";
         sqlsrv_query($conn, $sql_insert);
         $_SESSION["email"] = $email;
         $_SESSION["vorname"] = $vorname;

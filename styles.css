@@ -55,6 +55,15 @@ header{
     float: right;
     padding: 30px 16px;
 }
+.backimg a.backimg{
+    text-align: justify;
+    position: relative;
+}
+.backimg a.backimg:hover{
+    padding: 0 0;
+    background-color: transparent;
+    color: transparent;
+}
 .topnav a{
     color: var(--main-color);
     font-family: TeleNeo,Helvetica,Arial,sans-serif;
@@ -101,7 +110,6 @@ header{
     visibility: visible;
     transform: scale(100) translateX(2px);
 }
-
 .topnav img{
     margin: auto;
     height: 60px;
@@ -223,6 +231,7 @@ header{
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
 .pictureres img {
     height: 50px;
     width: 100px;
