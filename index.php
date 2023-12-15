@@ -1,6 +1,6 @@
 <?php
 session_start();
-var_dump($_SERVER['MYSQL_USER']);
+var_dump($_SERVER['test']);
 ?>
 <html lang="DE">
 <head>
