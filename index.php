@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SERVER['MYSQL_USER']);
 ?>
 <html lang="DE">
 <head>
