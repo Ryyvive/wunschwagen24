@@ -5,23 +5,17 @@ if(isset($_POST["suchtyp"])){
 $_SESSION["POST"] = $_POST;
 }
 unset($_POST);
-$_SESSION["serverName"] = "wunschwagen24-dbserver-dev.database.windows.net";
 $connectionOptions = array(
-    "Database" => $_SERVER["Database"],
-    "Uid" =>  $_SERVER["Uid"],
-    "PWD" =>  $_SERVER["PWD"]
+    "Database" => $_SERVER["APPSETTING_Database"],
+    "Uid" =>  $_SERVER["APPSETTING_Uid"],
+    "PWD" =>  $_SERVER["APPSETTING_PWD"]
 );
 
-$conn = sqlsrv_connect($_SERVER["serverName"], $connectionOptions);
+$conn = sqlsrv_connect($_SERVER["APPSETTING_serverName"], $connectionOptions);
 
-function search_AI(): void
+function search_AI($options): void
 {
-    $connectionOptions = array(
-        "Database" => $_SERVER["Database"],
-        "Uid" =>  $_SERVER["Uid"],
-        "PWD" =>  $_SERVER["PWD"]
-    );
-    $sql_con = sqlsrv_connect($_SERVER["serverName"], $connectionOptions);
+    $sql_con = sqlsrv_connect($_SERVER["APPSETTING_serverName"], $options);
 
     ## auf Suche Exact zutreffen
     #TODO: Komplexe SQL Abfrage zum Suchen von genau passenden Angeboten
@@ -292,7 +286,7 @@ function func_create_html_table($sql_search_statement): void
                 <input type="submit" value="Neue Suche!">
             </form>
             <?php
-            search_AI();
+            search_AI($connectionOptions);
         }
     } else {
         ?>
