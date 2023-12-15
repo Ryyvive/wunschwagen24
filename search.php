@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(isset($_GET["ai"])){
+    header("refresh:2;url=search.php");
+}
 if(isset($_POST["suchtyp"])){
 $_SESSION["POST"] = $_POST;
 }
@@ -202,7 +205,7 @@ function func_create_html_table($sql_search_statement,$conn): void
             <?php
         } else if ($_SESSION["POST"]["suchtyp"] == "KI") {
             ?>
-            <form class="search" method="POST" action="search.php?">
+            <form class="search" method="POST" action="search.php?ai=load">
                 <h1>Wie funktioniert unsere KI?</h1>
                 <p> Wir stellen Ihnen nun ein paar Fragen. Ihre Antworten werden anschließend analysiert und Sie
                     bekommen die besten Gebrauchtwagen vorgeschlagen</p>
@@ -259,14 +262,11 @@ function func_create_html_table($sql_search_statement,$conn): void
                 <input type="number" name="leistung" id="leistung" max="300">
                 <label for="leistung">PS</label>
                 <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-AI">
-                <input type="hidden" name="waiting" id="waiting" value="load">
                 <h3>Alles gescheckt?</h3>
                 <input type="submit" value="Jetzt zum Traumauto">
             </form>
             <?php
-        } else if (($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI") && $_SESSION["POST"]["waiting"] == "load") {
-            $_SESSION["POST"]["waiting"] = "noload";
-            header("refresh:5;url=search.php");
+        } else if (($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI") && isset($_GET["ai"])) {
             ?>
             <div class="container_animation">
                 <div class="progressbar">
