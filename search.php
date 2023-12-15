@@ -119,6 +119,17 @@ function func_create_html_table($sql_search_statement,$conn): void
     <?php include("header.php") ?>
 </header>
 <div class="breaker"></div>
+<?php
+if (isset($_GET["ai"])) {
+?>
+<div class="container_animation">
+    <div class="progressbar">
+        <span class="loading"></span>
+        <p class="load"><p>Loading...</p>
+    </div>
+</div>
+<?php
+}else{?>
 <div class="main-content">
     <?php
     if (!isset($_GET["id"])) {
@@ -266,16 +277,7 @@ function func_create_html_table($sql_search_statement,$conn): void
                 <input type="submit" value="Jetzt zum Traumauto">
             </form>
             <?php
-        } else if (($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI") && isset($_GET["ai"])) {
-            ?>
-            <div class="container_animation">
-                <div class="progressbar">
-                    <span class="loading"></span>
-                    <p class="load"><p>Loading...</p>
-                </div>
-            </div>
-            <?php
-            } else if ($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI"){
+        } else if ($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI"){
             ?>
             <h2>Nicht so voreilig</h2>
             <p>Das Ergebnis der Suche kommt schon noch. Entwicklung braucht eben seine Zeit</p>
@@ -293,5 +295,8 @@ function func_create_html_table($sql_search_statement,$conn): void
     }
     ?>
 </div>
+<?php
+}
+?>
 </body>
 </html>
