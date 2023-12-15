@@ -11,8 +11,8 @@
             </th>
             <th>
                 <a href="search.php">Suchen</a>
-                <a href>Verkaufen</a>
-                <a href>Beratung</a>
+                <a href="sell.php">Verkaufen</a>
+                <a href="consulting.php">Beratung</a>
             </th>
             <th>
                 <?php
