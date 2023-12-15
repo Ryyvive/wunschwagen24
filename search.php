@@ -265,6 +265,8 @@ function func_create_html_table($sql_search_statement,$conn): void
             </form>
             <?php
         } else if (($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI") && $_SESSION["POST"]["waiting"] == "load") {
+            $_SESSION["POST"]["waiting"] = "noload";
+            header("refresh:5;url=search.php");
             ?>
             <div class="container_animation">
                 <div class="progressbar">
@@ -273,8 +275,6 @@ function func_create_html_table($sql_search_statement,$conn): void
                 </div>
             </div>
             <?php
-            $_SESSION["POST"]["waiting"] = "noload";
-            header("refresh:5;url=search.php");
             } else if ($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI"){
             ?>
             <h2>Nicht so voreilig</h2>
