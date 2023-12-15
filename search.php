@@ -274,7 +274,7 @@ function func_create_html_table($sql_search_statement,$conn): void
             </div>
             <?php
             $_SESSION["POST"]["waiting"] = "noload";
-            header("Refresh:10");
+            header("refresh:5;url=search.php");
             } else if ($_SESSION["POST"]["suchtyp"] == "DONE-ML" || $_SESSION["POST"]["suchtyp"] == "DONE-AI"){
             ?>
             <h2>Nicht so voreilig</h2>
