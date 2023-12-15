@@ -233,7 +233,7 @@ header{
 }
 
 .pictureres img {
-    height: 50px;
+    max-height: 50px;
     width: 100px;
 }
 .container_animation {
@@ -279,4 +279,11 @@ header{
     10%{
         width: 10%;
     }
+}
+.teaminfo img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height:300px;
+    max-width: 300px;
 }
