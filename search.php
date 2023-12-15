@@ -13,7 +13,6 @@ $connectionOptions = array(
 $conn = sqlsrv_connect($_SERVER["APPSETTING_serverName"], $connectionOptions);
 function search_AI($conn): void
 {
-    var_dump($conn);
     $sql_con = $conn;#sqlsrv_connect($_SERVER["APPSETTING_serverName"], $options);
 
     ## auf Suche Exact zutreffen
