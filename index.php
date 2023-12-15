@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SERVER['test']);
 ?>
 <html lang="DE">
 <head>

@@ -5,17 +5,22 @@ $_SESSION["POST"] = $_POST;
 }
 unset($_POST);
 $_SESSION["serverName"] = "wunschwagen24-dbserver-dev.database.windows.net";
-$_SESSION["connectionOptions"] = array(
-    "Database" => "wunschwagen-db-dev",
-    "Uid" => "CloudSA1cb8415e",
-    "PWD" => "340Uuxwp7Mcxo7Khy"
+$connectionOptions = array(
+    "Database" => $_SERVER["Database"],
+    "Uid" =>  $_SERVER["Uid"],
+    "PWD" =>  $_SERVER["PWD"]
 );
 
-$conn = sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
+$conn = sqlsrv_connect($_SERVER["serverName"], $connectionOptions);
 
 function search_AI(): void
 {
-    $sql_con = sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
+    $connectionOptions = array(
+        "Database" => $_SERVER["Database"],
+        "Uid" =>  $_SERVER["Uid"],
+        "PWD" =>  $_SERVER["PWD"]
+    );
+    $sql_con = sqlsrv_connect($_SERVER["serverName"], $connectionOptions);
 
     ## auf Suche Exact zutreffen
     #TODO: Komplexe SQL Abfrage zum Suchen von genau passenden Angeboten
