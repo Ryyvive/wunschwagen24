@@ -185,7 +185,7 @@ if (isset($_GET["ai"])) {
             <h1> Deutschlands größte Gebrauchtswagen Datenbank</h1>
             <form class="search" method="POST" action="search.php">
                 <label for="brand">Marke</label>
-                <select id="brand" name="brand">
+                <select id="brand" name="brand" class="custom-dropdown">
                     <option selected value="%"></option>
                     <?php
                     $sqlstatement = "SELECT DISTINCT brand from cars";
@@ -194,10 +194,10 @@ if (isset($_GET["ai"])) {
                         echo "<option value =" . $row["brand"] . ">" . $row["brand"] . "</option>";
                     }
                     ?>
-                </select>
+                </select><br><br>
 
                 <label for="model">Modell</label>
-                <select id="model" name="model">
+                <select id="model" name="model" class="custom-dropdown">
                     <option selected value="%"></option>
                     <?php
                     $sqlstatement = "SELECT DISTINCT model from dbo.cars";
@@ -206,10 +206,10 @@ if (isset($_GET["ai"])) {
                         echo "<option value =" . $row["model"] . ">" . $row["model"] . "</option>";
                     }
                     ?>
-                </select>
+                </select><br><br>
 
                 <label for="price">Maximaler Preis</label>
-                <select id="price" name="price">
+                <select id="price" name="price" class="custom-dropdown">
                     <option selected value="1000000"></option>
                     <?php
                     $minstatement = "Select MIN(price) as price FROM dbo.cars";
@@ -222,10 +222,10 @@ if (isset($_GET["ai"])) {
                         echo "<option value =" . $price . ">" . $price . "</option>";
                     }
                     ?>
-                </select>
+                </select><br><br>
 
                 <label for="mileage">Kilometerstand</label>
-                <select id="mileage" name="mileage">
+                <select id="mileage" name="mileage" class="custom-dropdown">
                     <option selected value="1000000"></option>
                     <?php
                     $minstatement = "Select MIN(mileage) as mileage FROM CARS";
@@ -238,7 +238,7 @@ if (isset($_GET["ai"])) {
                         echo "<option value =" . $stand . ">" . $stand . "</option>";
                     }
                     ?>
-                </select>
+                </select><br><br>
                 <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-ML">
                 <input type="submit" value="Zur Suche">
             </form>
