@@ -72,17 +72,22 @@ function search_AI($conn): void
             $sort = "Order by power desc";
         }
         #lifespan
-        #TODO
+        if($_SESSION["POST"]["lifespan"]=="1"){
+            $lifespan = " brand in ('Honda','BMW')";
+        }else if($_SESSION["POST"]["lifespan"]=="2"){
+            $lifespan = " brand in ('Volkswagen','BMW')";
+        }else{
+            $lifespan = "brand LIKE '%'";
+        }
 
         #personen
-        #TODO
         $personen = " seats >= ".$_SESSION["POST"]["personen"];
 
         #budget
-        #TODO
+        $budget = " price <=  ".$_SESSION["POST"]["budget"];
 
         #getriebe
-        #TODO
+        $getriebe = " transmission = ".$_SESSION["POST"]["getriebe"];
 
         #innenausstattung
         #TODO
@@ -92,7 +97,7 @@ function search_AI($conn): void
 
         $sql_search_recommend = "Select TOP 100 * From dbo.cars where category in (" .
             implode(",", $sql_category) .
-            ") and ".$personen;
+            ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." ".$sort;
         func_create_html_table($sql_search_recommend,$conn);
     }
 }
@@ -101,6 +106,7 @@ function func_create_html_table($sql_search_statement,$conn): void
 {
     $sql_con = $conn;#sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
     $result = sqlsrv_query($sql_con, $sql_search_statement);
+    if($result){
     echo "<table>";
     while ($car = sqlsrv_fetch_array($result)) {
         echo "<tr>";
@@ -130,6 +136,7 @@ function func_create_html_table($sql_search_statement,$conn): void
         echo "</tr>";
     }
     echo "</table>";
+}
 }
 
 ?>
@@ -279,9 +286,9 @@ if (isset($_GET["ai"])) {
                 </select>
                 <h2>Wieviele Personen sollten mindestens in das Auto passen?</h2>
                 <label for="personen"></label>
-                <input type="number" min="1" max="9" name="personen" id="personen" value="1" class="custom-number">
+                <input required type="number" min="1" max="9" name="personen" id="personen" value="3" class="custom-number">
                 <h2>Wieviel wollen Sie maximal für den Wagen ausgeben?</h2>
-                <input type="number" min="1000" name="budget" id="budget" value="1000" step="1000" class="custom-number">
+                <input required type="number" min="1000" name="budget" id="budget" value="40000" step="1000" class="custom-number">
                 <label for="budget">€</label>
                 <h2>Welche Getriebeart bevorzugen Sie?</h2>
                 <fieldset class="toggle">
@@ -298,28 +305,28 @@ if (isset($_GET["ai"])) {
                 <h2>Welchen Energieträger soll ihr Auto haben?</h2>
                 <section class="app">
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Autogas" name="Autogas" value="Autogas">
+                        <input type="checkbox" id="Autogas" name="Autogas" value="Autogas" checked>
                         <div>
                             <span>Autogas</span>
                         </div>
                     </article><br>
 
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Diesel" name="Diesel" value="Diesel">
+                        <input type="checkbox" id="Diesel" name="Diesel" value="Diesel" checked>
                         <div>
                             <span>Diesel</span>
                         </div>
                     </article><br>
 
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Benzin" name="Benzin" value="Benzin">
+                        <input type="checkbox" id="Benzin" name="Benzin" value="Benzin" checked>
                         <div>
                             <span>Benzin</span>
                         </div>
                     </article><br>
 
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Elektrisch" name="Elektrisch" value="Elektrisch">
+                        <input type="checkbox" id="Elektrisch" name="Elektrisch" value="Elektrisch" checked>
                         <div>
                             <span>Elektrisch</span>
                         </div>

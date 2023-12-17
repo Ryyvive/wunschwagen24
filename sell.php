@@ -29,6 +29,11 @@ function newcar_ml()
     );
     $inital_model["baseprice"] += 1000*$brandvalue[$_SESSION["POST"]["brand"]];
     # Including mileage
+    $inital_model["baseprice"] += (200000-$_SESSION["POST"]["mileage"])/100;
+    #condition
+    $inital_model["baseprice"] += 5-$_SESSION["POST"]["condition"]*1000;
+    #Owners
+    $inital_model["baseprice"] -= $_SESSION["POST"]["owners"]*1000;
 
     return $inital_model["baseprice"];
 }
@@ -95,9 +100,13 @@ function newcar_ml()
             <option selected value="Automatik">Automatik</option>
             <option value = "Schaltgetriebe">Schaltgetriebe</option>
         </select>
+        <label for = "owners">Vorbesitzer</label>
         <input required type="number" id="owners">
+        <label for ="ccm">Hubraum</label>
         <input required type="number" id="ccm">
-        <input required type="file" accept=".jpeg,.png,.jpg">
+        <label for = "pictures">Fotos vom Auto</label>
+        <input required type="file" id = "pictures" accept=".jpeg,.png,.jpg">
+        <label for = "condition">Zustand des Wagens</label>
         <select required id="condition">
             <option selected value = "1">Sehr gut/Scheckheft</option>
             <option value = "2">Gepflegt</option>
