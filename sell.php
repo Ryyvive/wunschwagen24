@@ -76,6 +76,7 @@ function newcar_ml()
     }
     ?>
     <form method="post" action="sell.php?loading=ml">
+        <label for="brand">Marke</label>
         <select required id = "brand" name = "brand">
             <option selected value="BMW">BMW</option>
             <option selected value="KIA">KIA</option>
@@ -83,9 +84,13 @@ function newcar_ml()
         </select>
         <label for="model">Modell</label>
         <input required type="text" id = "model">
+        <label for="mileage">Kilometerstand</label>
         <input required type="number" id = mileage>
+        <label for="registration-year">Erstzulassung</label>
         <input required type = "number" id="registration-year">
+        <label for="power">PS</label>
         <input required type="number" id = "power">
+        <label for="transmission">Getriebe</label>
         <select id = "transmission" name = "transmission">
             <option selected value="Automatik">Automatik</option>
             <option value = "Schaltgetriebe">Schaltgetriebe</option>
@@ -93,6 +98,12 @@ function newcar_ml()
         <input required type="number" id="owners">
         <input required type="number" id="ccm">
         <input required type="file" accept=".jpeg,.png,.jpg">
+        <select required id="condition">
+            <option selected value = "1">Sehr gut/Scheckheft</option>
+            <option value = "2">Gepflegt</option>
+            <option value = "3">Gebrauchsspuren</option>
+            <option value = "4">Unfallwagen</option>
+        </select>
         <input type="hidden" name = "newcar" id="newcar" value= "new">
         <input type="submit">
 
