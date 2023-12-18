@@ -111,6 +111,7 @@ function newcar_ml()
                     <option value = "3">Gebrauchsspuren</option>
                     <option value = "4">Unfallwagen</option>
                 </select><br><br>
+                <label for="condition">Bild</label>
                 <label class="custom-file-upload">
                     <input required type="file" accept=".jpeg,.png,.jpg" id="file-upload" style="display: none;">
                     <span>Wähle eine Datei aus</span>
