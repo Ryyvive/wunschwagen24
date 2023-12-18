@@ -162,7 +162,7 @@ function safesearch($conn){
         '"innenausstatung":"'.$_SESSION["POST"]["innenausstatung"]. '",'.
         '"fuel":"'.implode(",",$_SESSION["POST"]["fuel"]). '",'.
         '"leistung":"'.$_SESSION["POST"]["leistung"]. '",'.
-        '"suchtyp":"'.$_SESSION["POST"]["suchtyp"]. '",'.
+        '"suchtyp":"'.$_SESSION["POST"]["suchtyp"]. '"'.
         '}';
     $sql_insert = "INSERT INTO search (email, search) VALUES ('".$_SESSION["email"]."','".$json."')";
     sqlsrv_query($conn, $sql_insert);
