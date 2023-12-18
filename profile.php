@@ -1,10 +1,9 @@
 <?php
 session_start();
-function abmelden(): void
-{
+if(isset($_GET["logout"])){
     unset($_SESSION["email"]);
     unset($_SESSION["vorname"]);
-    header("url=index.php");
+    header("Location:index.php");
 }
 ?>
 <html lang="DE">
@@ -19,4 +18,4 @@ function abmelden(): void
 </header>
 <div class="breaker"></div>
 <div class="main-content">
-    <button onclick="<?php abmelden()?>">Abmelden</button>
+    <button type="submit" onclick="window.location.href='profile.php?logout=true'">Abmelden</button>
