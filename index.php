@@ -60,5 +60,8 @@ session_start();
         WunschWagen24 - Gemeinsam machen wir Ihre Autoträume wahr.
     </h2>
 </div>
+<footer class="site-footer">
+    <?php include("footer.php") ?>
+</footer>
 </body>
 </html>

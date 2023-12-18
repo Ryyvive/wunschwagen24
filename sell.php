@@ -122,6 +122,9 @@ function newcar_ml()
                 <input type="submit">
             </form>
         </div>
+    <footer class="site-footer">
+        <?php include("footer.php") ?>
+    </footer>
     <script>
         window.onload = function() {
             var fileInput = document.getElementById('file-upload');

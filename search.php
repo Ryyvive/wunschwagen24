@@ -436,5 +436,8 @@ if (isset($_GET["ai"])) {
 <?php
 }
 ?>
+<footer class="site-footer">
+    <?php include("footer.php") ?>
+</footer>
 </body>
 </html>
