@@ -583,3 +583,23 @@ input[type=checkbox]:checked ~ div {
         width: 100%;
     }
 }
+
+/* File Upload Sell */
+.custom-file-upload {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.custom-file-upload span {
+    font-size: 1rem;
+}

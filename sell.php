@@ -64,60 +64,76 @@ function newcar_ml()
         }else{
     ?>
             <div class="main-content">
-    <h1>Ihr Auto liegt ihnen am Herzen?</h1>
-    <p>Uns auch! - Deswegen stellen wir sicher, dass ihr Auto in die richtigen Hände kommt.</p>
-    <?php
-    if(isset($_SESSION["POST"]["newcar"])&&$_SESSION["POST"]["newcar"]=="new"){
-        echo "Der geschätzte Preis für ihren Neuwagen beträgt <br>";
-        echo newcar_ml()." €";
-        ?>
-        <form method = 'post' action = 'sell.php'>
-            <input type="hidden" id="newcar" name = "newcar" value="submit">
-            <input type='submit'>
-        </form>
-    <?php
-    } else if(isset($_SESSION["POST"]["newcar"])){
-        echo "Ihre Angaben wurden an uns gesendet. Wir werden uns in Kürze mit ihnen in Verbindung setzen";
-    }
-    ?>
-    <form method="post" action="sell.php?loading=ml">
-        <label for="brand">Marke</label>
-        <select required id = "brand" name = "brand">
-            <option selected value="BMW">BMW</option>
-            <option selected value="KIA">KIA</option>
-            <option selected value="Volkswagen">VW</option>
-        </select>
-        <label for="model">Modell</label>
-        <input required type="text" id = "model">
-        <label for="mileage">Kilometerstand</label>
-        <input required type="number" id = mileage>
-        <label for="registration-year">Erstzulassung</label>
-        <input required type = "number" id="registration-year">
-        <label for="power">PS</label>
-        <input required type="number" id = "power">
-        <label for="transmission">Getriebe</label>
-        <select id = "transmission" name = "transmission">
-            <option selected value="Automatik">Automatik</option>
-            <option value = "Schaltgetriebe">Schaltgetriebe</option>
-        </select>
-        <label for = "owners">Vorbesitzer</label>
-        <input required type="number" id="owners">
-        <label for ="ccm">Hubraum</label>
-        <input required type="number" id="ccm">
-        <label for = "pictures">Fotos vom Auto</label>
-        <input required type="file" id = "pictures" accept=".jpeg,.png,.jpg">
-        <label for = "condition">Zustand des Wagens</label>
-        <select required id="condition">
-            <option selected value = "1">Sehr gut/Scheckheft</option>
-            <option value = "2">Gepflegt</option>
-            <option value = "3">Gebrauchsspuren</option>
-            <option value = "4">Unfallwagen</option>
-        </select>
-        <input type="hidden" name = "newcar" id="newcar" value= "new">
-        <input type="submit">
+            <h1>Ihr Auto liegt ihnen am Herzen?</h1>
+            <p>Uns auch! - Deswegen stellen wir sicher, dass ihr Auto in die richtigen Hände kommt.</p>
+            <?php
+            if(isset($_SESSION["POST"]["newcar"])&&$_SESSION["POST"]["newcar"]=="new"){
+                echo "Der geschätzte Preis für ihren Neuwagen beträgt <br>";
+                echo newcar_ml()." €";
+                ?>
+                <form method = 'post' action = 'sell.php'>
+                    <input type="hidden" id="newcar" name = "newcar" value="submit">
+                    <input type='submit'>
+                </form>
+            <?php
+            } else if(isset($_SESSION["POST"]["newcar"])){
+                echo "Ihre Angaben wurden an uns gesendet. Wir werden uns in Kürze mit ihnen in Verbindung setzen";
+            }
+            ?>
+            <form method="post" action="sell.php?loading=ml">
+                <label for="brand">Marke</label>
+                <select required id = "brand" name = "brand" class="custom-dropdown">
+                    <option selected value="BMW">BMW</option>
+                    <option value="KIA">KIA</option>
+                    <option value="Volkswagen">VW</option>
+                </select><br><br>
+                <label for="model">Modell</label>
+                <input required type="text" id = "model" class="custom-number"><br><br>
+                <label for="mileage">Kilometerstand</label>
+                <input required type="number" id = mileage class="custom-number"><br><br>
+                <label for="registration-year">Erstzulassung</label>
+                <input required type = "number" id="registration-year" class="custom-number"><br><br>
+                <label for="power">PS</label>
+                <input required type="number" id = "power" class="custom-number"><br><br>
+                <label for="transmission">Getriebe</label>
+                <select id = "transmission" name = "transmission" class="custom-dropdown">
+                    <option selected value="Automatik">Automatik</option>
+                    <option value = "Schaltgetriebe">Schaltgetriebe</option>
+                </select><br><br>
+                <label for="ccm">Hubraum</label>
+                <input required type="number" id="ccm" class="custom-number"><br><br>
+                <label for="owners">Anzahl Vorbesitzer</label>
+                <input required type="number" id="owners" class="custom-number"><br><br>
+                <label for="condition">Zustand</label>
+                <select required id="condition" class="custom-dropdown">
+                    <option selected value = "1">Sehr gut/Scheckheft</option>
+                    <option value = "2">Gepflegt</option>
+                    <option value = "3">Gebrauchsspuren</option>
+                    <option value = "4">Unfallwagen</option>
+                </select><br><br>
+                <label class="custom-file-upload">
+                    <input required type="file" accept=".jpeg,.png,.jpg" id="file-upload" style="display: none;">
+                    <span>Wähle eine Datei aus</span>
+                </label>
+                <div id="file-name"></div>
+                <br><br>
+                <input type="hidden" name = "newcar" id="newcar" value= "new">
+                <input type="submit">
+            </form>
+        </div>
+    <script>
+        window.onload = function() {
+            var fileInput = document.getElementById('file-upload');
 
-    </form>
-</div>
+            fileInput.onchange = function() {
+                if (fileInput.files.length > 0) {
+                    var fileName = fileInput.files[0].name;
+                    document.getElementById('file-name').textContent = 'Ausgewählte Datei: ' + fileName;
+                }
+            };
+        };
+    </script>
+</body>
 <?php
         }
             ?>
