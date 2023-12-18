@@ -89,7 +89,7 @@ function newcar_ml()
                 <label for="model">Modell</label>
                 <input required type="text" id = "model" name="model" class="custom-number"><br><br>
                 <label for="mileage">Kilometerstand</label>
-                <input required type="number" id = mileage name = "mileage" class="custom-number"><br><br>
+                <input required type="number" id = mileage name = "mileage" max ="199999" class="custom-number"><br><br>
                 <label for="registration-year">Erstzulassung</label>
                 <input required type = "number" id="registration-year" name="registration-year" max="2023" class="custom-number"><br><br>
                 <label for="power">PS</label>
