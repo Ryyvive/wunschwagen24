@@ -114,41 +114,39 @@ function search_AI($conn): void
     }
 }
 
-function func_create_html_table($sql_search_statement,$conn): void
-{
-    $sql_con = $conn;#sqlsrv_connect($_SESSION["serverName"], $_SESSION["connectionOptions"]);
-    $result = sqlsrv_query($sql_con, $sql_search_statement);
-    if($result){
-    echo "<table>";
-    while ($car = sqlsrv_fetch_array($result)) {
-        echo "<tr>";
-        #Bild des Autos
-        echo "<td>";
-        echo "<div class=pictureres>";
-        echo "<img src='cars/". $car["brand"] . $car["model"] .".jpg' alt=''>";
-        echo "</div>";
-        echo "</td>";
-        # Eigenschaften des Autos
-        echo "<td>";
-        echo "Marke: " . $car["brand"] . "<br>";
-        echo "Modell: " . $car["model"] . "<br>";
-        echo "Preis: " . $car["price"] . " €<br>";
-        echo "</td>";
-        echo "<td>";
-        echo "Erstzulassung: " . $car["registration"]->format('Y') . "<br>";
-        echo "Leistung: " . $car["power"] . " PS<br>";
-        echo "Kraftstoff: " . $car["fuel"] . "<br>";
-        echo "</td>";
-        ?>
-        <td>
-            <button onclick="window.location.href='search.php?id=<?php echo $car["id"] ?>'">Zum Auto</button>
-        </td>
-        <?php
-        echo "</tr>";
+function func_create_html_table($sql_search_statement, $conn): void {
+    $result = sqlsrv_query($conn, $sql_search_statement);
+    if ($result) {
+        echo "<table class='car-table'>";
+        while ($car = sqlsrv_fetch_array($result)) {
+            echo "<tr class='car-row'>";
+            // Bild des Autos
+            echo "<td class='car-image'>";
+            echo "<div class='car-picture'>";
+            echo "<img src='cars/" . $car["brand"] . $car["model"] . ".jpg' alt=''>";
+            echo "</div>";
+            echo "</td>";
+            // Eigenschaften des Autos
+            echo "<td class='car-info'>";
+            echo "<span class='car-property'>Marke:</span> " . $car["brand"] . "<br>";
+            echo "<span class='car-property'>Modell:</span> " . $car["model"] . "<br>";
+            echo "<span class='car-property'>Preis:</span> " . $car["price"] . " €<br>";
+            echo "</td>";
+            echo "<td class='car-info'>";
+            echo "<span class='car-property'>Erstzulassung:</span> " . $car["registration"]->format('Y') . "<br>";
+            echo "<span class='car-property'>Leistung:</span> " . $car["power"] . " PS<br>";
+            echo "<span class='car-property'>Kraftstoff:</span> " . $car["fuel"] . "<br>";
+            echo "</td>";
+            // Button
+            echo "<td class='car-button'>";
+            echo "<button onclick='window.location.href=\"search.php?id=" . $car["id"] . "\"'>Zum Auto</button>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
     }
-    echo "</table>";
 }
-}
+
 function safesearch($conn){
     $json =
         '{'.
@@ -440,6 +438,8 @@ if (isset($_GET["ai"])) {
 <?php
 }
 ?>
+<div class="breaker"></div>
+<div class="breaker"></div>
 <footer class="site-footer">
     <?php include("footer.php") ?>
 </footer>

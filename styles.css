@@ -649,6 +649,49 @@ input[type=checkbox]:checked ~ div span {
 }
 
 /* Search Table */
+
+.car-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.car-row:nth-child(odd) {
+    background-color: #f4f4f4;
+}
+
+.car-image, .car-info, .car-button {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.car-picture img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.car-info {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.car-button button {
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.car-button button:hover {
+    background-color: var(--secundary-color);
+}
+
+/* Search Car Detail Page*/
 .search-back-button {
     background-color: var(--main-color);
     color: white;
