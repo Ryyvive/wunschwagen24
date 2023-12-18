@@ -67,9 +67,9 @@ function search_AI($conn): void
 
         #sparsamkeit
         if($_SESSION["POST"]["sparsamkeit"]=="consumption"){
-            $sort = "Order by consumtion asc";
+            $sort = " consumption asc";
         }else{
-            $sort = "Order by power desc";
+            $sort = " power desc";
         }
         #lifespan
         if($_SESSION["POST"]["lifespan"]=="1"){
@@ -87,7 +87,7 @@ function search_AI($conn): void
         $budget = " price <=  ".$_SESSION["POST"]["budget"];
 
         #getriebe
-        $getriebe = " transmission = ".$_SESSION["POST"]["getriebe"];
+        $getriebe = " transmission = '".$_SESSION["POST"]["getriebe"]."'";
 
         #innenausstattung
         #TODO
@@ -97,7 +97,7 @@ function search_AI($conn): void
 
         $sql_search_recommend = "Select TOP 100 * From dbo.cars where category in (" .
             implode(",", $sql_category) .
-            ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." ".$sort;
+            ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." Order by ".$sort;
         func_create_html_table($sql_search_recommend,$conn);
     }
 }
@@ -292,8 +292,8 @@ if (isset($_GET["ai"])) {
                 <label for="budget">€</label>
                 <h2>Welche Getriebeart bevorzugen Sie?</h2>
                 <fieldset class="toggle">
-                    <input type="radio" name="getriebe" id="auto" value="auto" checked/><label for="auto">Automatik</label>
-                    <input type="radio" name="getriebe" id="manuel" value="manuel"/><label for="manuel">Schaltgetriebe</label>
+                    <input type="radio" name="getriebe" id="auto" value="Automatik" checked/><label for="auto">Automatik</label>
+                    <input type="radio" name="getriebe" id="manuel" value="Schaltgetriebe"/><label for="manuel">Schaltgetriebe</label>
                 </fieldset>
                 <h2>Wie wichtig ist Ihnen eine hochwertige Innenausstatung?</h2>
                 <label for="innenausstatung"></label>
