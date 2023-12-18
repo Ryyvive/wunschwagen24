@@ -108,7 +108,6 @@ function search_AI($conn): void
         $sql_search_recommend = "Select TOP 100 * From dbo.cars where category in (" .
             implode(",", $sql_category) .
             ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." and ".$kraftstof." and ".$innenausstattung." Order by ".$sort.$usecase;
-        echo $sql_search_recommend;
         func_create_html_table($sql_search_recommend,$conn);
     }
 }
