@@ -104,10 +104,12 @@ function search_AI($conn): void
         }
         $kraftstof .= "'None')";
 
+        #power
+        $power = " power >= ".$_SESSION["POST"]["leistung"];
 
         $sql_search_recommend = "Select TOP 100 * From dbo.cars where category in (" .
             implode(",", $sql_category) .
-            ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." and ".$kraftstof." and ".$innenausstattung." Order by ".$sort.$usecase;
+            ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." and ".$kraftstof." and ".$innenausstattung." and ".$power." Order by ".$sort.$usecase;
         func_create_html_table($sql_search_recommend,$conn);
     }
 }
@@ -146,6 +148,24 @@ function func_create_html_table($sql_search_statement,$conn): void
     }
     echo "</table>";
 }
+}
+function safesearch($conn){
+    $json =
+        '{'.
+        '"usecase":"'.$_SESSION["POST"]["usecase"]. '",'.
+        '"nutzart":"'.$_SESSION["POST"]["nutzart"]. '",'.
+        '"sparsamkeit":"'.$_SESSION["POST"]["sparsamkeit"]. '",'.
+        '"lifespan":"'.$_SESSION["POST"]["lifespan"]. '",'.
+        '"personen":"'.$_SESSION["POST"]["personen"]. '",'.
+        '"budget":"'.$_SESSION["POST"]["budget"]. '",'.
+        '"getriebe":"'.$_SESSION["POST"]["getriebe"]. '",'.
+        '"innenausstatung":"'.$_SESSION["POST"]["innenausstatung"]. '",'.
+        '"fuel":"'.implode(",",$_SESSION["POST"]["fuel"]). '",'.
+        '"leistung":"'.$_SESSION["POST"]["leistung"]. '",'.
+        '"suchtyp":"'.$_SESSION["POST"]["suchtyp"]. '",'.
+        '}';
+    $sql_insert = "INSERT INTO search (email, search) VALUES ('".$_SESSION["email"]."','".$json."')";
+    sqlsrv_query($conn, $sql_insert);
 }
 
 ?>
@@ -359,6 +379,11 @@ if (isset($_GET["ai"])) {
                 <input type="submit" value="Neue Suche!">
             </form>
             <?php
+            if (isset($_SESSION["email"])){
+            ?>
+                <button onclick="<?php echo safesearch($conn);?>">Suche Speichern</button>
+            <?php
+            }
             search_AI($conn);
         }
     } else {
@@ -394,6 +419,17 @@ if (isset($_GET["ai"])) {
             }
             echo "</table>";
         }
+        ?>
+        <h1>Inen gefällt was Sie sehen?</h1>
+        <p> Setzen Sie sich hier mit unserem Team in Kontakt</p>
+        <form method = "POST" action="search.php">
+            <label for="kontaktmail">Kontakadresse</label>
+            <input type ="email" name = "kontaktmail" value = "<?php if(isset($_SESSION["email"])){echo $_SESSION["email"];} ?>">
+            <label for="beschreibung">Beschreibung</label>
+            <input type="text" name="beschreibung">
+            <input type="submit">
+        </form>
+    <?php
     }
     ?>
 </div>
