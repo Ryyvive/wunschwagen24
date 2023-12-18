@@ -2,7 +2,6 @@
 session_start();
 if(isset($_POST["newcar"])){
     $_SESSION["POST"] = $_POST;
-
 }
 if(isset($_GET["loading"])){
     header("refresh:2;url=sell.php");
@@ -88,24 +87,24 @@ function newcar_ml()
                     <option value="Volkswagen">VW</option>
                 </select><br><br>
                 <label for="model">Modell</label>
-                <input required type="text" id = "model" class="custom-number"><br><br>
+                <input required type="text" id = "model" name="model" class="custom-number"><br><br>
                 <label for="mileage">Kilometerstand</label>
-                <input required type="number" id = mileage class="custom-number"><br><br>
+                <input required type="number" id = mileage name = "mileage" class="custom-number"><br><br>
                 <label for="registration-year">Erstzulassung</label>
-                <input required type = "number" id="registration-year" class="custom-number"><br><br>
+                <input required type = "number" id="registration-year" name="registration-year" max="2023" class="custom-number"><br><br>
                 <label for="power">PS</label>
-                <input required type="number" id = "power" class="custom-number"><br><br>
+                <input required type="number" id = "power" name="power" class="custom-number"><br><br>
                 <label for="transmission">Getriebe</label>
                 <select id = "transmission" name = "transmission" class="custom-dropdown">
                     <option selected value="Automatik">Automatik</option>
                     <option value = "Schaltgetriebe">Schaltgetriebe</option>
                 </select><br><br>
                 <label for="ccm">Hubraum</label>
-                <input required type="number" id="ccm" class="custom-number"><br><br>
+                <input required type="number" id="ccm" name ="ccm" class="custom-number"><br><br>
                 <label for="owners">Anzahl Vorbesitzer</label>
-                <input required type="number" id="owners" class="custom-number"><br><br>
+                <input required type="number" id="owners" name ="owners" class="custom-number"><br><br>
                 <label for="condition">Zustand</label>
-                <select required id="condition" class="custom-dropdown">
+                <select required id="condition" name="condition" class="custom-dropdown">
                     <option selected value = "1">Sehr gut/Scheckheft</option>
                     <option value = "2">Gepflegt</option>
                     <option value = "3">Gebrauchsspuren</option>
