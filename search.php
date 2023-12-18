@@ -90,9 +90,9 @@ function search_AI($conn): void
 
         #innenausstattung
         if ($_SESSION["POST"]["innenausstatung"] == "1"){
-            $innenausstattung = "registration >= '01-01-2008'";
+            $innenausstattung = "registration >= '01-01-2005'";
         }else if($_SESSION["POST"]["innenausstatung"] == "2"){
-            $innenausstattung = "registration >= '01-01-2006'";
+            $innenausstattung = "registration >= '01-01-2003'";
         }else{
             $innenausstattung = "registration >= '01-01-2000'";
         }
