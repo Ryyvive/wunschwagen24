@@ -17,7 +17,7 @@
             <th>
                 <?php
                 if(isset($_SESSION["vorname"])){
-                    echo "<a>Willkommen ".$_SESSION["vorname"]."</a>";
+                    echo "<a href = profile.php>Willkommen ".$_SESSION["vorname"]."</a>";
                 }else{
                     ?>
                     <button onclick="window.location.href='login.php'">Anmelden</button>
