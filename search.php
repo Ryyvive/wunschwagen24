@@ -388,7 +388,9 @@ if (isset($_GET["ai"])) {
         }
     } else {
         ?>
-        <button onclick="window.location.href='search.php?'">Zurück zur Suche</button>
+        <br><br>
+        <button onclick="window.location.href='search.php?'" class="search-back-button">Zurück zur Suche</button>
+        <div class="search-results">
         <?php
         $sql_onecar = "Select * FROM dbo.cars where id = ".$_GET["id"];
         $result_onecar = sqlsrv_query($conn, $sql_onecar);
@@ -396,37 +398,39 @@ if (isset($_GET["ai"])) {
             echo "<table>";
             while ($car = sqlsrv_fetch_array($result_onecar)) {
                 echo "<tr>";
-                #Bild des Autos
+                // Bild des Autos
                 echo "<td>";
-                echo "<div class=pictureres>";
-                echo "<img src='cars/". $car["brand"] . $car["model"] .".jpg' alt=''>";
+                echo "<div class='pictureres'>";
+                echo "<img src='cars/" . $car["brand"] . $car["model"] . ".jpg' alt=''>";
                 echo "</div>";
                 echo "</td>";
-                # Eigenschaften des Autos
+                // Eigenschaften des Autos
                 echo "<td>";
-                echo "Marke: " . $car["brand"] . "<br>";
-                echo "Modell: " . $car["model"] . "<br>";
-                echo "Preis: " . $car["price"] . " €<br>";
-                echo "Erstzulassung: " . $car["registration"]->format('Y') . "<br>";
-                echo "Leistung: " . $car["power"] . " PS<br>";
-                echo "Kraftstoff: " . $car["fuel"] . "<br>";
-                echo "Kilometerstand: ".$car["mileage"]. " km<br>";
-                echo "Getriebe: ".$car["transmission"]."<br>";
-                echo "Kategorie: ".$car["category"]."<br>";
-                echo "Sitze: ".$car["seats"]."<br>";
+                echo "<span class='car-property'>Marke:</span> " . $car["brand"] . "<br>";
+                echo "<span class='car-property'>Modell:</span> " . $car["model"] . "<br>";
+                echo "<span class='car-property'>Preis:</span> " . $car["price"] . " €<br>";
+                echo "<span class='car-property'>Erstzulassung:</span> " . $car["registration"]->format('Y') . "<br>";
+                echo "<span class='car-property'>Leistung:</span> " . $car["power"] . " PS<br>";
+                echo "<span class='car-property'>Kraftstoff:</span> " . $car["fuel"] . "<br>";
+                echo "<span class='car-property'>Kilometerstand:</span> " . $car["mileage"]. " km<br>";
+                echo "<span class='car-property'>Getriebe:</span> " . $car["transmission"] . "<br>";
+                echo "<span class='car-property'>Kategorie:</span> " . $car["category"] . "<br>";
+                echo "<span class='car-property'>Sitze:</span> " . $car["seats"] . "<br>";
                 echo "</td>";
                 echo "</tr>";
+
             }
             echo "</table>";
         }
         ?>
-        <h1>Inen gefällt was Sie sehen?</h1>
+        </div>
+        <h1>Ihnen gefällt was Sie sehen?</h1>
         <p> Setzen Sie sich hier mit unserem Team in Kontakt</p>
         <form method = "POST" action="search.php">
             <label for="kontaktmail">Kontakadresse</label>
-            <input type ="email" name = "kontaktmail" value = "<?php if(isset($_SESSION["email"])){echo $_SESSION["email"];} ?>">
+            <input type ="email" name = "kontaktmail" value = "<?php if(isset($_SESSION["email"])){echo $_SESSION["email"];} ?>" class="custom-number">
             <label for="beschreibung">Beschreibung</label>
-            <input type="text" name="beschreibung">
+            <input type="text" name="beschreibung" class="custom-number"><br><br>
             <input type="submit">
         </form>
     <?php
