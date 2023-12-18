@@ -58,9 +58,8 @@ function search_AI($conn): void
         $sql_category = $translastion_category[$_SESSION["POST"]["nutzart"]];
 
         #usecase
-        #TODO
         if($_SESSION["POST"]["usecase"] == "pendeln"){
-            $usecase = "";
+            $usecase = ", mileage asc";
         }else{
             $usecase = "";
         }
@@ -90,14 +89,26 @@ function search_AI($conn): void
         $getriebe = " transmission = '".$_SESSION["POST"]["getriebe"]."'";
 
         #innenausstattung
-        #TODO
+        if ($_SESSION["POST"]["innenausstatung"] == "1"){
+            $innenausstattung = "registration >= '01-01-2008'";
+        }else if($_SESSION["POST"]["innenausstatung"] == "2"){
+            $innenausstattung = "registration >= '01-01-2006'";
+        }else{
+            $innenausstattung = "registration >= '01-01-2000'";
+        }
 
         #Energieträger
-        #TODO
+        $kraftstof = " fuel in (";
+        foreach ($_SESSION["POST"]['fuel'] as $fuel) {
+            $kraftstof .= "'".$fuel."', ";
+        }
+        $kraftstof .= "'None')";
+
 
         $sql_search_recommend = "Select TOP 100 * From dbo.cars where category in (" .
             implode(",", $sql_category) .
-            ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." Order by ".$sort;
+            ") and ".$personen." and ".$budget." and ".$lifespan." and ".$getriebe." and ".$kraftstof." and ".$innenausstattung." Order by ".$sort.$usecase;
+        echo $sql_search_recommend;
         func_create_html_table($sql_search_recommend,$conn);
     }
 }
@@ -111,7 +122,6 @@ function func_create_html_table($sql_search_statement,$conn): void
     while ($car = sqlsrv_fetch_array($result)) {
         echo "<tr>";
         #Bild des Autos
-        #TODO: API Anbindung
         echo "<td>";
         echo "<div class=pictureres>";
         echo "<img src='cars/". $car["brand"] . $car["model"] .".jpg' alt=''>";
@@ -305,28 +315,28 @@ if (isset($_GET["ai"])) {
                 <h2>Welchen Energieträger soll ihr Auto haben?</h2>
                 <section class="app">
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Autogas" name="Autogas" value="Autogas" checked>
+                        <input type="checkbox" id="fuel[]" name="fuel[]" value="Autogas" checked>
                         <div>
                             <span>Autogas</span>
                         </div>
                     </article><br>
 
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Diesel" name="Diesel" value="Diesel" checked>
+                        <input type="checkbox" id="fuel[]" name="fuel[]" value="Diesel" checked>
                         <div>
                             <span>Diesel</span>
                         </div>
                     </article><br>
 
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Benzin" name="Benzin" value="Benzin" checked>
+                        <input type="checkbox" id="fuel[]" name="fuel[]" value="Benzin" checked>
                         <div>
                             <span>Benzin</span>
                         </div>
                     </article><br>
 
                     <article class="custom-checkbox">
-                        <input type="checkbox" id="Elektrisch" name="Elektrisch" value="Elektrisch" checked>
+                        <input type="checkbox" id="fuel[]" name="fuel[]" value="Elektrisch" checked>
                         <div>
                             <span>Elektrisch</span>
                         </div>
@@ -356,6 +366,35 @@ if (isset($_GET["ai"])) {
         ?>
         <button onclick="window.location.href='search.php?'">Zurück zur Suche</button>
         <?php
+        $sql_onecar = "Select * FROM dbo.cars where id = ".$_GET["id"];
+        $result_onecar = sqlsrv_query($conn, $sql_onecar);
+        if($result_onecar){
+            echo "<table>";
+            while ($car = sqlsrv_fetch_array($result_onecar)) {
+                echo "<tr>";
+                #Bild des Autos
+                echo "<td>";
+                echo "<div class=pictureres>";
+                echo "<img src='cars/". $car["brand"] . $car["model"] .".jpg' alt=''>";
+                echo "</div>";
+                echo "</td>";
+                # Eigenschaften des Autos
+                echo "<td>";
+                echo "Marke: " . $car["brand"] . "<br>";
+                echo "Modell: " . $car["model"] . "<br>";
+                echo "Preis: " . $car["price"] . " €<br>";
+                echo "Erstzulassung: " . $car["registration"]->format('Y') . "<br>";
+                echo "Leistung: " . $car["power"] . " PS<br>";
+                echo "Kraftstoff: " . $car["fuel"] . "<br>";
+                echo "Kilometerstand: ".$car["mileage"]. " km<br>";
+                echo "Getriebe: ".$car["transmission"]."<br>";
+                echo "Kategorie: ".$car["category"]."<br>";
+                echo "Sitze: ".$car["seats"]."<br>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        }
     }
     ?>
 </div>
