@@ -603,3 +603,81 @@ input[type=checkbox]:checked ~ div {
 .custom-file-upload span {
     font-size: 1rem;
 }
+
+/* Consulting site */
+.teaminfo {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.teaminfo table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.teaminfo td {
+    padding: 15px;
+    vertical-align: top;
+    font-size: 20px;
+    font-family: TeleNeo,Helvetica,Arial,sans-serif;
+}
+
+.highlight-name {
+    font-size: 25px; /* Noch größere Schriftgröße für das Jahr */
+    display: block; /* Stellt sicher, dass das Jahr in seiner eigenen Zeile steht */
+    font-family: TeleNeo,Helvetica,Arial,sans-serif;
+    color: var(--main-color);
+}
+
+.highlight-year {
+    font-size: 50px; /* Noch größere Schriftgröße für das Jahr */
+    display: block; /* Stellt sicher, dass das Jahr in seiner eigenen Zeile steht */
+    font-family: TeleNeo ExtraBold,Helvetica,Arial,sans-serif;
+    color: var(--secundary-color);
+}
+
+.teaminfo img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.teaminfo tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Contact form */
+.contact-form {
+    background-color: #fff;
+    padding: 20px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.contact-form h2 {
+    margin-top: 0;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-bottom: 5px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="date"],
+.contact-form select,
+.contact-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
