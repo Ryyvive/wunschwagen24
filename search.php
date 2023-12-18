@@ -362,7 +362,7 @@ if (isset($_GET["ai"])) {
                     </article><br>
                 </section>
                 <h2>Benötige Leistung</h2>
-                <input type="number" name="leistung" id="leistung" max="300" class="custom-number">
+                <input required type="number" name="leistung" id="leistung" max="300" value = "75" class="custom-number">
                 <label for="leistung">PS</label>
                 <input type="hidden" name="suchtyp" id="suchtyp" value="DONE-AI">
                 <br><br>
