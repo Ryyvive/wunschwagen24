@@ -65,20 +65,22 @@ function newcar_ml()
             <div class="main-content">
             <h1>Ihr Auto liegt ihnen am Herzen?</h1>
             <p>Uns auch! - Deswegen stellen wir sicher, dass ihr Auto in die richtigen Hände kommt.</p>
-            <?php
-            if(isset($_SESSION["POST"]["newcar"])&&$_SESSION["POST"]["newcar"]=="new"){
-                echo "Der geschätzte Preis für ihren Neuwagen beträgt <br>";
-                echo newcar_ml()." €";
+                <?php
+                if (isset($_SESSION["POST"]["newcar"]) && $_SESSION["POST"]["newcar"] == "new") {
+                    echo "<div class='price-info'>Der geschätzte Preis für ihren Neuwagen beträgt <br>";
+                    echo "<span class='price-value'>" . newcar_ml() . " €</span>";
+                    echo "</div>";
                 ?>
                 <form method = 'post' action = 'sell.php'>
                     <input type="hidden" id="newcar" name = "newcar" value="submit">
                     <input type='submit'>
-                </form>
+                </form><br>
             <?php
             } else if(isset($_SESSION["POST"]["newcar"])){
-                echo "Ihre Angaben wurden an uns gesendet. Wir werden uns in Kürze mit ihnen in Verbindung setzen";
+                echo "<div class='sell-send'>Ihre Angaben wurden an uns gesendet. Wir werden uns in Kürze mit ihnen in Verbindung setzen</div>";
             }
             ?>
+            <br><br>
             <form method="post" action="sell.php?loading=ml">
                 <label for="brand">Marke</label>
                 <select required id = "brand" name = "brand" class="custom-dropdown">
@@ -118,8 +120,8 @@ function newcar_ml()
                 <div id="file-name"></div>
                 <br><br>
                 <input type="hidden" name = "newcar" id="newcar" value= "new">
-                <input type="submit">
-            </form>
+                <input type="submit" value="Preis berechnen">
+            </form><br>
         </div>
     <footer class="site-footer">
         <?php include("footer.php") ?>

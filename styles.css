@@ -758,6 +758,28 @@ input[type=checkbox]:checked ~ div span {
     font-size: 1rem;
 }
 
+/* Sell Page Price Calculation Display */
+
+.price-info {
+    font-size: 18px;
+    color: var(--main-color);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.price-value {
+    font-size: 35px;
+    color: var(--secundary-color);
+    font-weight: bold;
+}
+
+.sell-send {
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+    color: #66CC33;
+    font-size: 18px;
+}
+
 /* Consulting site */
 .teaminfo {
     max-width: 800px;
