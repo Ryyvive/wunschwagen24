@@ -58,7 +58,7 @@ session_start();
             </tr>
             <tr>
                 <td>
-                    <img src="team/Marzusch.jpeg" alt="">
+                    <img src="team/Marzusch.jpg" alt="">
                 </td>
                 <td>
                     <span class="highlight-name">Herr Marzusch</span>
