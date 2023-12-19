@@ -379,7 +379,9 @@ if (isset($_GET["ai"])) {
             <?php
             if (isset($_SESSION["email"])){
             ?>
-                <button onclick="<?php echo safesearch($conn);?>">Suche Speichern</button>
+                <p> oder</p>
+                <button onclick="<?php echo safesearch($conn);?>" class="save-search">Suche Speichern</button>
+                <br><br><br>
             <?php
             }
             search_AI($conn);
