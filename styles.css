@@ -533,6 +533,38 @@ body:not(:-moz-handler-blocked) fieldset {
     border: 0;
 }
 
+/* Long Text Search */
+.custom-long-text {
+    padding: 0.5rem 1rem; /* Polsterung für bessere Greifbarkeit */
+    font-size: 1rem; /* Lesbare Schriftgröße */
+    border: 1px solid #ddd; /* Dezente Grenzlinie */
+    border-radius: 4px; /* Abgerundete Ecken für modernes Aussehen */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Tiefe */
+    width: 100%;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Glatter Übergang für Hover-Effekte */
+}
+
+.custom-long-text:hover {
+    border-color: #bbb; /* Farbänderung beim Hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Intensiverer Schatten beim Hover */
+}
+
+.custom-long-text:focus {
+    outline: none; /* Entfernen des Standard-Outlines beim Fokus */
+    border-color: var(--main-color); /* Hervorhebung bei Fokus */
+    box-shadow: 0 0 0 2px rgba(102, 179, 251, 0.5); /* Schatten um das fokussierte Element */
+}
+
+.custom-long-text::-webkit-inner-spin-button,
+.custom-long-text::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.custom-long-text::-moz-focus-inner {
+    border: 0;
+}
+
 /* Checkbox Search */
 .app {
     max-width: 300px;

@@ -425,10 +425,10 @@ if (isset($_GET["ai"])) {
         <h1>Ihnen gefällt was Sie sehen?</h1>
         <p> Setzen Sie sich hier mit unserem Team in Kontakt</p>
         <form method = "POST" action="search.php">
-            <label for="kontaktmail">Kontakadresse</label>
-            <input type ="email" name = "kontaktmail" value = "<?php if(isset($_SESSION["email"])){echo $_SESSION["email"];} ?>" class="custom-number">
+            <label for="kontaktmail">Kontaktadresse</label><br>
+            <input type ="email" name = "kontaktmail" value = "<?php if(isset($_SESSION["email"])){echo $_SESSION["email"];} ?>" class="custom-number"><br><br>
             <label for="beschreibung">Beschreibung</label>
-            <input type="text" name="beschreibung" class="custom-number"><br><br>
+            <textarea name="beschreibung" class="custom-long-text" rows="4"></textarea><br><br>
             <input type="submit">
         </form>
     <?php
