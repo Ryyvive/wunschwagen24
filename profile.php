@@ -18,4 +18,6 @@ if(isset($_GET["logout"])){
 </header>
 <div class="breaker"></div>
 <div class="main-content">
+    <br>
     <button type="submit" onclick="window.location.href='profile.php?logout=true'">Abmelden</button>
+    <br><br>
